@@ -14,10 +14,10 @@ exports.getIndex = (req, res, next) => {
       });
   };
   
-exports.getAppBook = (req, res, next) => {
+exports.getAddBook = (req, res, next) => {
   res.render('books/bookinsert');
 };
-exports.postAppBook = (req, res, next) => {
+exports.postAddBook = (req, res, next) => {
   const titleInput = req.body.title;
   const authorInput = req.body.author;
   const ratingInput = req.body.rating;
@@ -30,3 +30,12 @@ exports.postAppBook = (req, res, next) => {
   console.log(book);
   res.redirect('/add-book')
 };
+exports.getbook=(req,res,next)=>{
+  const bookID = req.params.bookID;
+  Book.findById(bookID)
+  .then(book=>{
+    res.render('books/bookdetail',{
+      bookData:book
+    })
+  })
+}

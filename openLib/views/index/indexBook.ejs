@@ -46,24 +46,7 @@
                             </p>
                             <p class="card-text">Rating: <%=books.rating%> <img height="15px"
                                         src="https://image.flaticon.com/icons/png/512/1828/1828884.png"></p>
-                            <a href="#" class="btn btn-primary">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card mx-2" style="width: 18rem; padding: 0px;">
-                        <img src="<%=books.imageUrl%>" width="100%" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <%=books.title%>
-                            </h5>
-                            <p class="card-text">Author: <%=books.author%>
-                            </p>
-                            <p class="card-text">Published date: <%=moment(books.published_date).format('DD /MM/YYYY')%>
-                            </p>
-                            <p class="card-text">Rating: <%=books.rating%> <img height="15px"
-                                        src="https://image.flaticon.com/icons/png/512/1828/1828884.png"></p>
-                            <a href="#" class="btn btn-primary">Details</a>
+                            <a href="/book/<%=books.id%>" class="btn btn-primary">Details</a>
                         </div>
                     </div>
                 </div>
