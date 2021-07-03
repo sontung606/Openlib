@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../template/head')%>
+        <title>OpenLib</title>
+</head>
+
+<body>
+    <%-include('../template/navbar')%>
+        <div class="styleText d-flex justify-content-center align-items-center flex-column bd-highlight"
+            style="background-image: url('image/books1.jpg'); background-repeat: no-repeat; height: 500px;">
+            <div style="color: #ecf0f1; ">
+                <div class="p-2 bd-highlight">
+                    <h1>OpenLib Local Bookstores.</h1>
+                </div>
+                <div class="p-2 bd-highlight">Shop Online with Bookshop.</div>
+                <div>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Book's name, author..."
+                                aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-secondary" type="button" id="button-addon2">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+        <br>
+        <h2 style="text-align: center;" class="h2 "> books</h2>
+        <br>
+        <div class="container">
+            <div class="row">
+            <% for (let books of booksData) { %>
+                <div class="col-4">
+                    <div class="card m-2" style="width: 18rem; padding: 0px;">
+                        <img src="<%=books.imageUrl%>" width="100%" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%=books.title%>
+                            </h5>
+                            <p class="card-text">Author: <%=books.author%>
+                            </p>
+                            <p class="card-text">Published date: <%=moment(books.published_date).format('DD /MM/YYYY')%>
+                            </p>
+                            <p class="card-text">Rating: <%=books.rating%> <img height="15px"
+                                        src="https://image.flaticon.com/icons/png/512/1828/1828884.png"></p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card mx-2" style="width: 18rem; padding: 0px;">
+                        <img src="<%=books.imageUrl%>" width="100%" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%=books.title%>
+                            </h5>
+                            <p class="card-text">Author: <%=books.author%>
+                            </p>
+                            <p class="card-text">Published date: <%=moment(books.published_date).format('DD /MM/YYYY')%>
+                            </p>
+                            <p class="card-text">Rating: <%=books.rating%> <img height="15px"
+                                        src="https://image.flaticon.com/icons/png/512/1828/1828884.png"></p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+</body>
+
+</html>
