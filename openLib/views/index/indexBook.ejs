@@ -7,6 +7,10 @@
 </head>
 <body>
     <%-include('../template/navbar')%>
+    <% if(locals.accountData){
+        console.log("hello")
+        console.log(accountData);
+    } %>
         <div class="styleText d-flex justify-content-center align-items-center flex-column bd-highlight"
             style="background-image: url('image/books1.jpg'); background-repeat: no-repeat; height: 500px;">
             <div style="color: #ecf0f1; ">

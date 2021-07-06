@@ -9,7 +9,8 @@ router.get('/', index.getIndex);
 router.get('/add-book',book.getAddBook)
 router.post('/add-book',book.postAddBook)
 router.get('/book/:bookID',book.getbook)
-router.get('/login',account.getLogin );
+router.get('/login',account.getLogin);
+router.post('/login',account.postLogin );
 router.get('/signup',account.getSignUp);
 router.post('/signup',account.postSignUp);
 

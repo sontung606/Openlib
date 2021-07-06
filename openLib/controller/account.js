@@ -1,7 +1,15 @@
-
 const Account = require('../models/account');
 exports.getLogin=(req,res,next)=>{
     res.render('index/login');
+  }
+  exports.postLogin=(req,res,next)=>{
+    const emailInput = req.body.email;
+    Account.find({email:emailInput})
+    .then(result=>{
+      req.session.isLoggedIn=true;
+      req.session.accountData=result;
+      res.redirect('/');
+    })
   }
   exports.getSignUp=(req,res,next)=>{
     res.render('index/signUp',{
