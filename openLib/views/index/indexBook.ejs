@@ -5,7 +5,6 @@
     <%-include('../template/head')%>
         <title>OpenLib</title>
 </head>
-
 <body>
     <%-include('../template/navbar')%>
         <div class="styleText d-flex justify-content-center align-items-center flex-column bd-highlight"
@@ -28,31 +27,33 @@
         </div>
         </div>
         <br>
-        <h2 style="text-align: center;" class="h2 "> books</h2>
+        <h2 style="text-align: center;" class="h2"> Books</h2>
         <br>
-        <div class="container">
+        <div class="container bg-light ">
             <div class="row">
             <% for (let books of booksData) { %>
-                <div class="col-4">
-                    <div class="card m-2" style="width: 18rem; padding: 0px;">
-                        <img src="<%=books.imageUrl%>" width="100%" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <%=books.title%>
-                            </h5>
-                            <p class="card-text">Author: <%=books.author%>
-                            </p>
-                            <p class="card-text">Published date: <%=moment(books.published_date).format('DD /MM/YYYY')%>
-                            </p>
-                            <p class="card-text">Rating: <%=books.rating%> <img height="15px"
-                                        src="https://image.flaticon.com/icons/png/512/1828/1828884.png"></p>
-                            <a href="/book/<%=books.id%>" class="btn btn-primary">Details</a>
+                <div class="col-3">
+                    <div>
+                        <div class="card mb-2"style="height: 520px;">
+                            <img src="<%=books.imageUrl%>" class="card-img-top" height="300px" width="100%" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">
+                                    <%=books.title%>
+                                </h5>
+                                <p class="card-text author"><%=books.author%> </p>
+                            </div>
+                            <a href="#" style="background-color: #ffeaa7;">
+                            <div class="card-footer d-flex justify-content-center">
+                                Details
+                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <% } %>
             </div>
         </div>
+        <%-include('../template/footer') %>
 </body>
 
 </html>

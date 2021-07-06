@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%-include('../template/head')%>
+        <title>OpenLib Sign Up</title>
+        <style>
+            .loginContainer {
+                margin-top: 200px;
+            }
+        
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        
+            /* Firefox */
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+        </style>
+</head>
+
+<body onload="openModal()">
+    <% if(modal=='success') { 
+        %>
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Sign up</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Sign up success
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>   
+    <%} %>
+    <%-include('../template/navbar')%>
+        <div class="loginContainer" >
+            <div class="fw-bold" style="text-align: center; font-family: 'Times New Roman', Times, serif;">
+                <h1>Create a account</h1>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <div class="card" style="padding: 50px;">
+                    <form action="/signUP" method="POST">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="pass" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone number</label>
+                            <input type="number" class="form-control" name="phoneNum" aria-describedby="emailHelp">
+                        </div>
+                        <input type="hidden" class="form-control" name="authority" value="customer" aria-describedby="emailHelp">
+                        <input type="hidden" class="form-control" name="enabled" value="1" aria-describedby="emailHelp">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+            <div style="margin-bottom: 100px;">
+
+            </div>
+            <%-include('../template/footer')%>
+</body>
+<script>
+    function openModal() {
+   $(document).ready(function () {
+            $("#myModal").modal('show');
+        });
+    }
+   </script>
+
+</html>
