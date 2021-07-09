@@ -1,5 +1,5 @@
 const Book = require('../models/book');
-
+var moment = require('moment');
 exports.getAddBook = (req, res, next) => {
     res.render('books/bookinsert');
   };
@@ -20,7 +20,8 @@ exports.getAddBook = (req, res, next) => {
     Book.findById(bookID)
     .then(book=>{
       res.render('books/bookdetail',{
-        bookData:book
+        bookData:book,
+        moment:moment
       })
     })
   }

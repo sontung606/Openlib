@@ -4,6 +4,9 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const lib = require('./routes/libRoutes/lib');
+const account = require('./routes/libRoutes/account');
+const book = require('./routes/libRoutes/book');
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(session({
@@ -11,9 +14,15 @@ app.use(session({
   saveUninitialized: true, 
   secret: 'somesecret', 
   cookie: { maxAge: 60000 }}));
+app.use(function(req, res, next) {
+    res.locals.accountData = req.session.accountData;
+    next();
+});
 app.set('view engine','ejs');
 app.use(express.static(path.join(__dirname,'public')));
 app.use(lib);
+app.use(account);
+app.use(book);
 
 // app.use(errorController.get404);
 

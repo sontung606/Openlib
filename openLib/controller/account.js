@@ -4,12 +4,38 @@ exports.getLogin=(req,res,next)=>{
   }
   exports.postLogin=(req,res,next)=>{
     const emailInput = req.body.email;
+    const passInput = req.body.password;
     Account.find({email:emailInput})
     .then(result=>{
-      req.session.isLoggedIn=true;
-      req.session.accountData=result;
-      res.redirect('/');
+      if(result.length<=0){
+        return res.render('index/login',{
+          error:"Email or password is incorrect"
+        })
+      }
+      if(result[0].password === (passInput))
+      {
+        req.session.isLoggedIn=true;
+        req.session.accountData=result;
+        res.redirect('/');
+      }
+      else{
+        res.render('index/login',{
+          error:"Email or password is incorrect"
+        })
+      } 
     })
+    .catch(err=>{
+      res.render('index/login',{
+        error:"Email or password is incorrect"
+      })
+    })
+    
+  }
+  exports.getLogOut=(req,res,next)=>{
+    req.session.isLoggedIn=false;
+    req.session.accountData=null;
+    res.redirect('/');
+    
   }
   exports.getSignUp=(req,res,next)=>{
     res.render('index/signUp',{
