@@ -4,48 +4,54 @@
 <head>
     <%-include('../template/head')%>
         <title>book insert</title>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
 </head>
 
 <body>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
     <%-include('../template/navbar')%>
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             <div class="row">
-
                 <%-include('../template/navbarAdmin')%>
-                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                    <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
                         <div
                             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                             <h1 class="h2">List accounts</h1>
-                           
+
                         </div>
-                        <table class="table table-hover table-striped table-primary">
-                            <thead>
+                        <table class="table table-hover table-striped align-middle table-responsive-sm text-center"
+                            id="myTable">
+                            <thead class="table-light">
                                 <tr>
+                                    <th>Photo Thumbs</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone number</th>
-                                    <th>Authority</th>
-                                    <th>Stauts</th>
-                                    <th></th>
+                                    <th>Author</th>
+                                    <th>Description</th>
+                                    <th>Published</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <%for(account of accountData) { %>
+                                <%for(book of bookData) { %>
                                     <tr>
+                                        <td><img src="<%=book.imageUrl%>" alt="image"
+                                                style="height: 100px; width: auto;"></td>
                                         <td>
-                                            <%=account.name %>
+                                            <%=book.title %>
                                         </td>
                                         <td>
-                                            <%=account.email%>
+                                            <%=book.author%>
                                         </td>
                                         <td>
-                                            <%=account.phoneNum%>
+                                            <%=book.description%>
                                         </td>
                                         <td>
-                                            <%=account.authority%>
-                                        </td>
-                                        <td>
-                                            <%=account.enabled%>
+                                            <%=book.published_date%>
                                         </td>
                                         <td>
                                             <a href="#"><i class="fas fa-edit fa-lg"></i></a>
