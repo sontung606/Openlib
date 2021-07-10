@@ -6,6 +6,7 @@ const path = require('path');
 const lib = require('./routes/libRoutes/lib');
 const account = require('./routes/libRoutes/account');
 const book = require('./routes/libRoutes/book');
+const admin = require('./routes/libRoutes/admin');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(lib);
 app.use(account);
 app.use(book);
+app.use(admin);
 
 // app.use(errorController.get404);
 

@@ -5,7 +5,8 @@
     <title>book insert</title>
 </head>
 <body>
-    <div class="container">
+  <%-include('../template/navbar')%>
+    <div class="container-wrapper container">
         <form method="POST" action="/add-book">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Title</label>
@@ -40,5 +41,6 @@
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
+    <%-include('../template/footer')%>
 </body>
 </html>
