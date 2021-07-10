@@ -21,7 +21,7 @@
                     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
                         <div
                             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                            <h1 class="h2">List accounts</h1>
+                            <h1 class="h2">List books</h1>
 
                         </div>
                         <table class="table table-hover table-striped align-middle table-responsive-sm text-center"
@@ -54,8 +54,8 @@
                                             <%=book.published_date%>
                                         </td>
                                         <td>
-                                            <a href="#"><i class="fas fa-edit fa-lg"></i></a>
-                                            <a href="#" class="link-danger"><i class="fas fa-trash-alt fa-lg"></i></a>
+                                            <a href="/admin/update-book/<%=book._id%>"><i class="fas fa-edit fa-lg"></i></a>
+                                            <a href="/admin/delete-book/<%=book._id%>" class="link-danger"><i class="fas fa-trash-alt fa-lg"></i></a>
                                         </td>
                                     </tr>
                                     <% } %>

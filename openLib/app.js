@@ -7,8 +7,11 @@ const lib = require('./routes/libRoutes/lib');
 const account = require('./routes/libRoutes/account');
 const book = require('./routes/libRoutes/book');
 const admin = require('./routes/libRoutes/admin');
-
+const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
+
+
+app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(session({
   resave: true, 

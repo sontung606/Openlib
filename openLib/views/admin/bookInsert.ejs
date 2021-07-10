@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%-include('../template/head')%>
+    <title>book insert</title>
+</head>
+
+<body>
+  <%-include('../template/navbar')%>
+    <div class="container-fluid mb-3">
+      <div class="row">
+        <%-include('../template/navbarAdmin')%>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+              <h1 class="h2">List accounts</h1>
+
+            </div>
+            <form method="POST" action="/admin/add-book">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Author</label>
+                <input type="text" class="form-control" name="author">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Rating</label>
+                <input type="text" class="form-control" name="rating">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">description</label>
+                <input type="text" class="form-control" name="description">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">published_date</label>
+                <input type="date" class="form-control" name="published_date">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">imageUrl</label>
+                <input type="text" class="form-control" name="imageUrl">
+
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </main>
+      </div>
+    </div>
+    <%-include('../template/footer')%>
+</body>
+</html>

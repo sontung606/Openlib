@@ -10,9 +10,6 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/admin">ADmin dcm</a>
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -30,14 +27,22 @@
       </ul>
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <% if(locals.accountData){
-            %>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/login"><%= accountData[0].name %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
-            </li>
+          <% if(locals.accountData){%>
+            <%if(locals.accountData[0].authority === "admin"){ %>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/admin"><%= accountData[0].name %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
+              </li>
+              <%}else{%>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/customer"><%= accountData[0].name %></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
+                </li>
+                <%}%>
         <% }else {%>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/login">Login</a>
