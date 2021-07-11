@@ -9,6 +9,8 @@ const book = require('./routes/libRoutes/book');
 const admin = require('./routes/admin/admin');
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
+const isadmin = require('./middleware/is-admin');
+
 
 
 app.use(methodOverride('_method'))
@@ -27,7 +29,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(lib);
 app.use(account);
 app.use(book);
-app.use(admin);
+app.use(isadmin,admin);
 
 // app.use(errorController.get404);
 

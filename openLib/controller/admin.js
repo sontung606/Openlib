@@ -99,6 +99,5 @@ exports.postCreateAccount = (req, res, next) => {
     const id =req.params.Id;
     Account.findByIdAndDelete({_id:id}).then(()=>{
         res.redirect('/admin/showaccount');
-
     })
   }

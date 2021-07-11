@@ -5,14 +5,14 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const emailInput = req.body.email;
   const passInput = req.body.password;
-  Account.find({ email: emailInput })
+  Account.findOne({ email: emailInput })
     .then(result => {
       if (result.length <= 0) {
         return res.render('index/login', {
           error: "Email or password is incorrect"
         })
       }
-      if (result[0].password === (passInput)) {
+      if (result.password === (passInput)) {
         req.session.isLoggedIn = true;
         req.session.accountData = result;
         res.redirect('/');
