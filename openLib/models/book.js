@@ -18,6 +18,10 @@ const bookSchema = new Schema({
         required: true,
         trim:true
     },
+    categories:{
+        type:String,
+        required: true,
+    },
     description: {
         type: String,
         required: true,
