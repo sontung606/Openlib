@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%-include('../template/head')%>
+    <title>account update</title>
+</head>
+
+<body>
+  <%-include('../template/navbar')%>
+    <div class="container-fluid mb-3">
+      <div class="row">
+        <%-include('../template/navbarAdmin')%>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+              <h1 class="h2">List accounts</h1>
+
+            </div>
+            <form method="POST" action="/admin/update-account/<%=accountData._id%>">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="text" class="form-control" name="email" value="<%=accountData.email%>">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" value="<%=accountData.password%>">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name"value="<%=accountData.name%>">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Phone number</label>
+                <input type="tel" pattern="[0-9]*" class="form-control" name="phoneNum" value="<%=accountData.phoneNum%>">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Authority</label>
+                <select class="form-control" name="authority">
+                    <option value="customer">customer</option>
+                    <option value="admin">admin</option>
+                    <option value="staff">staff</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Enabled</label>
+                <select class="form-control" name="enabled">
+                    <option value="1">True</option>
+                    <option value="0">False</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </main>
+      </div>
+    </div>
+    <%-include('../template/footer')%>
+</body>
+</html>

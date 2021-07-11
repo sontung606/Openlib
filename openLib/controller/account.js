@@ -48,10 +48,16 @@ exports.postSignUp = (req, res, next) => {
   const authorityInput = req.body.authority;
   const enabledInput = req.body.enabled;
   const account = new Account({ email: emailInput, password: passInput, name: nameInput, phoneNum: phoneInput, authority: authorityInput, enabled: enabledInput });
-  account.save();
-  console.log(account);
-  res.render('index/signUp', {
-    modal: "success"
+  account.save().then(()=>{
+    res.render('index/signUp', {
+      modal: "success"
+    })
   })
+  .catch((err)=>{
+    res.render('index/signUp', {
+      error: err
+    })
+  })
+  
 }
 

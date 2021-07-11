@@ -6,7 +6,7 @@ const path = require('path');
 const lib = require('./routes/libRoutes/lib');
 const account = require('./routes/libRoutes/account');
 const book = require('./routes/libRoutes/book');
-const admin = require('./routes/libRoutes/admin');
+const admin = require('./routes/admin/admin');
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
 
@@ -19,7 +19,7 @@ app.use(session({
   secret: 'somesecret', 
   cookie: { maxAge: 60000 }}));
 app.use(function(req, res, next) {
-    res.locals.accountData = req.session.accountData;
+    res.locals.accountDataNav = req.session.accountData;
     next();
 });
 app.set('view engine','ejs');

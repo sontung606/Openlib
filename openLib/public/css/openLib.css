@@ -20,16 +20,6 @@
 .navOpenLib{
     background-color: #f7f1e3;
 }
-a{
-    text-decoration: none;
-    color: inherit; 
-    background-color: unset ;
-}
-a:hover{
-    text-decoration: none;
-    color: inherit; 
-    background-color: unset ;
-}
 
 .spantext{
     color: gray; 
@@ -69,4 +59,14 @@ a:hover{
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
+}
+a{
+    text-decoration: none;
+    color: inherit; 
+    background-color: unset ;
+}
+a:hover{
+    text-decoration: none;
+    color: inherit; 
+    background-color: unset ;
 }

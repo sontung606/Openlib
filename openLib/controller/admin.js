@@ -57,3 +57,48 @@ exports.patchUpdateBook=(req,res,next)=>{
         res.redirect('/admin/showAllBook');
     })
 }
+exports.getUpdateAccount=(req,res,next)=>{
+    const id =req.params.Id;
+    Account.findOne({_id:id}).then(result=>{
+        res.render('admin/accountUpdate',{
+            accountData:result
+        })
+    })
+}
+exports.postUpdateAccount=(req,res,next)=>{
+    const id =req.params.Id;
+    const data = req.body;
+    Account.findOneAndUpdate({_id:id},data).then(result=>{
+        res.redirect('/admin/showaccount');
+    })
+}
+exports.getCreateAccount=(req,res,next)=>{
+    res.render('admin/accountCreate');
+}
+exports.postCreateAccount = (req, res, next) => {
+    const emailInput = req.body.email;
+    const passInput = req.body.pass;
+    const nameInput = req.body.name;
+    const phoneInput = req.body.phoneNum;
+    const authorityInput = req.body.authority;
+    const enabledInput = req.body.enabled;
+    const account = new Account({ email: emailInput, password: passInput, name: nameInput, phoneNum: phoneInput, authority: authorityInput, enabled: enabledInput });
+    account.save()
+    .catch(err=>{
+        res.render('admin/accountCreate', {
+            error: err
+          })
+    })
+    .then(result=>{
+        res.render('admin/accountCreate', {
+            modal: "success"
+          })
+    });
+  }
+  exports.getDeleteAccount=(req,res,next)=>{
+    const id =req.params.Id;
+    Account.findByIdAndDelete({_id:id}).then(()=>{
+        res.redirect('/admin/showaccount');
+
+    })
+  }
