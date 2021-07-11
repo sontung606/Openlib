@@ -7,6 +7,7 @@ const lib = require('./routes/libRoutes/lib');
 const account = require('./routes/libRoutes/account');
 const book = require('./routes/libRoutes/book');
 const admin = require('./routes/libRoutes/admin');
+const customer = require('./routes/libRoutes/customer');
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
 
@@ -28,7 +29,7 @@ app.use(lib);
 app.use(account);
 app.use(book);
 app.use(admin);
-
+app.use(customer);
 // app.use(errorController.get404);
 
 mongoose
