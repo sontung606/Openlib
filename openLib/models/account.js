@@ -14,13 +14,21 @@ const accountSchema = new Schema({
     password:{
         type:String,
         trim:true,
+        minlength: 8
     },
-    name:{
+    firstname:{
+        type:String
+    },
+    lastname:{
         type:String
     },
     phoneNum:{
-        type:Number
+        type:Number,
+        maxlength: 10 
     },
+    birthday:{
+        type: Date
+    }, 
     authority :{
         type:String
     },
