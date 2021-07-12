@@ -20,7 +20,7 @@
                     <h4>User information</h4>
                     <div class="p-3" style="background-color: white;">
                         <div class="row">
-                            <form onSubmit="return validate();" action="/customer/update" method="POST">
+                            <form onSubmit="return validate();" action="/customer/update/<%=accountUser._id%>" method="POST">
                                 <div class="form-group d-flex">
                                     <div class="col-lg-2">
                                         <label for="first">Firstname:</label>

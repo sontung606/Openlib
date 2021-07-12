@@ -11,10 +11,10 @@ exports.getCustomer = (req, res, next) => {
     });
 };
 exports.patchCustomerInfo = (req, res, next) => {
-    const id = req.session.accountData.id;
+    const id = req.params.id;
     const data = req.body;
-    Account.findOneAndUpdate({_id: id}, data).then((account) => {
-        res.render('/customer');
+    Account.findByIdAndUpdate({_id: id}, data).then((account) => {
+        res.render('customer/customerPage');
     })
 }
 
