@@ -13,27 +13,36 @@ const accountSchema = new Schema({
     },
     password:{
         type:String,
+        require:true,
         trim:true,
         minlength: 8
     },
     firstname:{
-        type:String
+        type:String,
+        require:true
+
     },
     lastname:{
-        type:String
+        type:String,
+        require:true
+
     },
     phoneNum:{
         type:Number,
-        maxlength: 10 
+        maxlength: 10,
+        require:true
     },
     birthday:{
         type: Date
     }, 
     authority :{
-        type:String
+        type:String,
+        require:true
+
     },
     enabled:{
-        type:Boolean
+        type:Boolean,
+        require:true
     }
 })
 module.exports = mongoose.model('account', accountSchema);

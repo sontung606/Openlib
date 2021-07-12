@@ -30,17 +30,17 @@
       </ul>
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <% if(locals.accountData){%>
-            <%if(locals.accountData[0].authority === "admin"){ %>
+          <% if(locals.accountDataNav){%>
+            <%if(locals.accountDataNav.authority === "admin"){ %>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/admin">Welcome! <%= accountData[0].name %></a>
+                <a class="nav-link active" aria-current="page" href="/admin">Welcome! <%= accountDataNav.name %></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
               </li>
               <%}else{%>
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/customer">Welcome! <%= accountData[0].name %></a>
+                  <a class="nav-link active" aria-current="page" href="/customer">Welcome! <%= accountDataNav.name %></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="/logout">Log out</a>

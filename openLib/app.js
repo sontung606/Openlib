@@ -20,7 +20,7 @@ app.use(session({
   secret: 'somesecret', 
   cookie: { maxAge: 60000 }}));
 app.use(function(req, res, next) {
-    res.locals.accountData = req.session.accountData;
+    res.locals.accountDataNav = req.session.accountData;
     next();
 });
 app.set('view engine','ejs');
