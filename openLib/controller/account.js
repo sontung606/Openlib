@@ -64,9 +64,16 @@ exports.postSignUp = (req, res, next) => {
       modal: "success"
     })
   })
-    .catch((err) => {
+  .catch((err) => {
+    if (err.name === 'MongoError' && err.code === 11000) {
       res.render('index/signUp', {
-        error: err
+        error: 'Email is already registered'
+      })
+    }
+    let errorCustom = String(err.message).split(":");
+    console.log(err);
+      res.render('index/signUp', {
+        error: errorCustom[2]
       })
     })
 
