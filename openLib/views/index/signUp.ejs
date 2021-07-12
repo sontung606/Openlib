@@ -53,7 +53,7 @@
                 <div class="card" style="padding: 50px;">
                     <form action="/signUP" method="POST">
                         <% if(locals.error) {  %>
-                            <p class="text-danger">Email is used</p>
+                            <p class="text-danger"><%=error%></p>
                             <%}%>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
