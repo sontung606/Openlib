@@ -1,16 +1,26 @@
 const Account = require('../models/account');
 const BookOrders = require('../models/bookOrder');
 
+// user change info
 exports.getCustomer = (req, res, next) => {
     const accountUser = req.session.accountData;
-    const date = new Date(accountUser).toLocaleDateString('en-CA');
+    const date = new Date(accountUser.birthday).toLocaleDateString('en-CA');
     res.render('customer/customerPage', {
         accountUser: accountUser,
         date: date
     });
 };
+exports.patchCustomerInfo = (req, res, next) => {
+    const id = req.session.accountData.id;
+    const data = req.body;
+    Account.findOneAndUpdate({_id: id}, data).then((account) => {
+        res.render('/customer');
+    })
+}
 
 
+
+// user order book
 exports.getBookOrder = (req, res, next) => {
     const date = new Date().toLocaleDateString('en-CA');
     res.render('customer/customerOrder', {

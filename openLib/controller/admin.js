@@ -11,7 +11,6 @@ exports.getAllAccount = (req, res, next) => {
         res.render('admin/showAllAccount', {
             accountData: result
         });
-
     })
 };
 
