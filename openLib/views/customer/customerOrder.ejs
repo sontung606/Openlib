@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../template/head')%>
+        <title>Document</title>
+        <style>
+            .formCustom{
+                display:flex; flex-direction: row;
+            }
+        </style>
+</head>
+
+<body>
+    <%-include('../template/navbar')%>
+        <div class="container-fluid">
+            <div class="row" style="background-color: whitesmoke;">
+                <%-include('../template/navbarCustomer')%>
+                <div class="col-md-10 p-5">
+                    <h4>User Order Book</h4>
+                    <div class="p-3" style="background-color: white;">
+                        <div class="row">
+                            <form>
+                                <div class="form-group d-flex">
+                                    <div class="col-lg-2">
+                                        <label for="usermail">Email</label>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input name="usermail" class="form-control" value="<%=accountUser.email%>" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex mt-3">
+                                    <div class="col-lg-2">
+                                        <label for="date">Order date:</label>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input name="date" class="form-control" value="<%=date%>" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex mt-3">
+                                    <div class="col-lg-2">
+                                        <label for="bookname">Book name:</label>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input name="bookname" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex mt-3">
+                                    <div class="col-lg-2">
+                                        <label for="author">Book author:</label>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input name="author" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex mt-3" style="justify-content: center; align-items: center">
+                                    <button type="submit" class="btn btn-outline-primary"><strong>Order book</strong></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%-include('../template/footer')%>
+</body>
+</html>
