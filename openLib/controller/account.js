@@ -43,21 +43,32 @@ exports.getSignUp = (req, res, next) => {
 exports.postSignUp = (req, res, next) => {
   const emailInput = req.body.email;
   const passInput = req.body.pass;
-  const nameInput = req.body.name;
+  const firstnameInput= req.body.firstname;
+  const lastnameInput = req.body.lastname;
+  const birthdayInput = req.body.birthday;
   const phoneInput = req.body.phoneNum;
   const authorityInput = req.body.authority;
   const enabledInput = req.body.enabled;
-  const account = new Account({ email: emailInput, password: passInput, name: nameInput, phoneNum: phoneInput, authority: authorityInput, enabled: enabledInput });
-  account.save().then(()=>{
+  const account = new Account({
+    email: emailInput,
+    password: passInput,
+    firstname:firstnameInput,
+    lastname:lastnameInput,
+    birthday:birthdayInput,
+    phoneNum: phoneInput,
+    authority: authorityInput,
+    enabled: enabledInput
+  });
+  account.save().then(() => {
     res.render('index/signUp', {
       modal: "success"
     })
   })
-  .catch((err)=>{
-    res.render('index/signUp', {
-      error: err
+    .catch((err) => {
+      res.render('index/signUp', {
+        error: err
+      })
     })
-  })
-  
+
 }
 

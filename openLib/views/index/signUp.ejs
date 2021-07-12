@@ -44,12 +44,12 @@
           </div>   
     <%} %>
     <%-include('../template/navbar')%>
-        <div class="loginContainer" >
+        <div class="loginContainer " style="margin-left: 30%; margin-right: 30%;" >
             <div class="fw-bold" style="text-align: center; font-family: 'Times New Roman', Times, serif;">
                 <h1>Create a account</h1>
             </div>
             <br>
-            <div class="d-flex justify-content-center">
+            <div >
                 <div class="card" style="padding: 50px;">
                     <form action="/signUP" method="POST">
                         <% if(locals.error) {  %>
@@ -65,15 +65,15 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Firstname</label>
-                            <input type="text" class="form-control" name="name" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" name="firstname" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Lastname</label>
-                            <input type="text" class="form-control" name="name" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" name="lastname" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Birthday</label>
-                            <input type="date" class="form-control" name="date" aria-describedby="emailHelp">
+                            <input type="date" class="form-control" name="birthday" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phone number</label>

@@ -27,8 +27,7 @@ const accountSchema = new Schema({
         require:true
     },
     phoneNum:{
-        type:Number,
-        maxlength: 10,
+        type:String,
         require:true
     },
     birthday:{
