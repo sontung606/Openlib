@@ -43,7 +43,7 @@ exports.getSignUp = (req, res, next) => {
 exports.postSignUp = (req, res, next) => {
   const emailInput = req.body.email;
   const passInput = req.body.pass;
-  const firstnameInput= req.body.firstname;
+  const firstnameInput = req.body.firstname;
   const lastnameInput = req.body.lastname;
   const birthdayInput = req.body.birthday;
   const phoneInput = req.body.phoneNum;
@@ -52,9 +52,9 @@ exports.postSignUp = (req, res, next) => {
   const account = new Account({
     email: emailInput,
     password: passInput,
-    firstname:firstnameInput,
-    lastname:lastnameInput,
-    birthday:birthdayInput,
+    firstname: firstnameInput,
+    lastname: lastnameInput,
+    birthday: birthdayInput,
     phoneNum: phoneInput,
     authority: authorityInput,
     enabled: enabledInput

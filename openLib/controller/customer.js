@@ -10,31 +10,34 @@ exports.getCustomer = (req, res, next) => {
     });
 };
 
+
 exports.getBookOrder = (req, res, next) => {
-    const accountUser = req.session.accountData;
-    const ts = Date.now();
-    let date_ob = new Date(ts);
-    let date = date_ob.getDate();
-    let month = date_ob.getMonth() + 1;
-    let year = date_ob.getFullYear();
+    const date = new Date().toLocaleDateString('en-CA');
     res.render('customer/customerOrder', {
-        accountUser: accountUser,
-        date: date + "-" + month + "-" + year
+        email: req.session.accountData.email,
+        date: date,
+        success: ''
     });
 };
 
-exports.postBookOrders = async (req, res, next) => {
+exports.postBookOrders = (req, res, next) => {
     const order = new BookOrders({
         accountMail : req.body.usermail,
         orderDate : req.body.date,
         bookName : req.body.bookname,
         bookAuthor : req.body.author
     });
-    order = await order.save().then(() => {
-        return res.render('customer/customerOrder')
+    order.save().then(() => {
+        res.render('customer/customerOrder',{
+            email: req.body.usermail,
+            date: req.body.date,
+            success: "Order successfully!"
+        })
     }).catch((err) => {
-        return res.render('customer/customerOrder', {
-            error: err
+        res.render('customer/customerOrder', {
+            error: err,
+            email: req.body.usermail,
+            date: req.body.date,
         });
     });
 }

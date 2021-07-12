@@ -20,13 +20,19 @@
                     <h4>User Order Book</h4>
                     <div class="p-3" style="background-color: white;">
                         <div class="row">
-                            <form>
+                            <% if(success != '') {%>
+                            <div class="alert alert-success" role="alert">
+                                <strong>Message</strong>: <%= success %>
+                              </div>
+                            <% } %>
+                            <form action="/customer-order/order" method="POST">
                                 <div class="form-group d-flex">
                                     <div class="col-lg-2">
                                         <label for="usermail">Email</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input name="usermail" class="form-control" value="<%=accountUser.email%>" disabled/>
+                                        <input name="usermail" class="form-control" value="<%=email%>" 
+                                        type="email" readonly/>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex mt-3">
@@ -34,7 +40,8 @@
                                         <label for="date">Order date:</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input name="date" class="form-control" value="<%=date%>" disabled/>
+                                        <input name="date" class="form-control" 
+                                        type="date" value="<%=date%>" readonly/>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex mt-3">
@@ -64,4 +71,5 @@
         </div>
         <%-include('../template/footer')%>
 </body>
+
 </html>
