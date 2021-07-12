@@ -63,7 +63,7 @@ exports.patchUpdateBook = (req, res, next) => {
 exports.getUpdateAccount = (req, res, next) => {
     const id = req.params.Id;
     Account.findOne({ _id: id }).then(result => {
-        const date = new Date(result.birthday).toLocaleDateString('en-CA');;
+        const date = new Date(result.birthday).toLocaleDateString('en-CA');
         res.render('admin/accountUpdate', {
             accountData: result,
             date:date
