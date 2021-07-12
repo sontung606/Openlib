@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../template/head')%>
+        <title>Account list</title>
+</head>
+
+<body>
+    <%-include('../template/navbar')%>
+        <div class="container-fluid">
+            <div class="row">
+
+                <%-include('../template/navbarAdmin')%>
+                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                        <div
+                            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                            <h1 class="h2">List accounts</h1>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" href="/admin/create-account">Create account</a>
+                        </div>
+                        <br>
+                        <table class="table table-hover table-striped table-primary">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Authority</th>
+                                    <th>Stauts</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(account of accountData) { %>
+                                    <tr>
+                                        <td>
+                                            <%=account.name %>
+                                        </td>
+                                        <td>
+                                            <%=account.email%>
+                                        </td>
+                                        <td>
+                                            <%=account.phoneNum%>
+                                        </td>
+                                        <td>
+                                            <%=account.authority%>
+                                        </td>
+                                        <td>
+                                            <%=account.enabled%>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/update-account/<%=account._id%>"><i class="fas fa-edit fa-lg"></i></a>
+                                            <a href="/admin/detele-account/<%=account._id%>" class="link-danger"><i class="fas fa-trash-alt fa-lg"></i></a>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                    </main>
+            </div>
+        </div>
+        <%-include('../template/footer')%>
+</body>
+</html>
