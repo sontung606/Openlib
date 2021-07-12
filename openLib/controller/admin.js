@@ -46,7 +46,7 @@ exports.getDeleteBook = (req, res, next) => {
 exports.getUpdateBook = (req, res, next) => {
     const id = req.params.Id;
     Book.findOne({ _id: id }).then(result => {
-        const date = new Date(result.published_date).toLocaleDateString('en-CA');;
+        const date = new Date(result.published_date).toLocaleDateString('en-CA');
         res.render('admin/bookUpdate', {
             BookData: result,
             date:date
