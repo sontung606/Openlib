@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%-include('../template/head')%>
+    <title>Borrow book</title>
+</head>
+
+<body>
+  <%-include('../template/navbar')%>
+  <div class="container mb-5">
+    <div class="row">
+        <h1 ><%=bookData.title%></h1>
+        <div class="col-4">
+            <img class="img-thumbnail" src="<%= bookData.imageUrl%>" alt="<%= bookData.imageUrl%>">
+        </div>
+        <div class="col-8">
+           <p><span class="spantext">Author: </span><%= bookData.author%> (author)</p>
+           <p><span class="spantext">Rating: </span><%= bookData.rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
+           <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>
+        </div>
+    </div>
+    <div>
+        <form method="POST" action="/book-borrow">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Date borrow</label>
+                <input type="date" name="dateBorrow" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="dateReturn" class="form-label">Return in:</label>
+                <select class="form-control" name="dateReturn" id="dateReturn">
+                <option value="2592000000">30 days</option>
+                <option value="5184000000">60 days</option>
+                <option value="7776000000">90 days</option>
+            </select>
+            </div>
+            <input type="hidden" name="bookId" value="<%=bookData._id%>">
+        <button class="btn btn-outline-primary  float-end">Submit</button>
+        </form>
+    </div>
+</div>
+    <%-include('../template/footer')%>
+</body>
+</html>

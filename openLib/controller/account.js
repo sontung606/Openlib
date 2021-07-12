@@ -5,14 +5,14 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const emailInput = req.body.email;
   const passInput = req.body.password;
-  Account.find({ email: emailInput })
+  Account.findOne({ email: emailInput })
     .then(result => {
       if (result.length <= 0) {
         return res.render('index/login', {
           error: "Email or password is incorrect"
         })
       }
-      if (result[0].password === (passInput)) {
+      if (result.password === (passInput)) {
         req.session.isLoggedIn = true;
         req.session.accountData = result;
         res.redirect('/');
@@ -48,10 +48,16 @@ exports.postSignUp = (req, res, next) => {
   const authorityInput = req.body.authority;
   const enabledInput = req.body.enabled;
   const account = new Account({ email: emailInput, password: passInput, name: nameInput, phoneNum: phoneInput, authority: authorityInput, enabled: enabledInput });
-  account.save();
-  console.log(account);
-  res.render('index/signUp', {
-    modal: "success"
+  account.save().then(()=>{
+    res.render('index/signUp', {
+      modal: "success"
+    })
   })
+  .catch((err)=>{
+    res.render('index/signUp', {
+      error: err
+    })
+  })
+  
 }
 

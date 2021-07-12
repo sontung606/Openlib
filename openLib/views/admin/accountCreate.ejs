@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%-include('../template/head')%>
+    <title>account create</title>
+</head>
+
+<body onload="openModal()">
+  <% if(locals.modal=='success') {  %>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create account</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Create success
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>   
+<%} %>
+  <%-include('../template/navbar')%>
+    <div class="container-fluid mb-3">
+      <div class="row">
+        <%-include('../template/navbarAdmin')%>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+              <h1 class="h2">List accounts</h1>
+
+            </div>
+            <form method="POST" action="/admin/create-account">
+              <% if(locals.error) {  %>
+                <p class="text-danger">Email is used</p>
+                <%}%>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" >
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Password</label>
+                <input type="text" class="form-control" name="password">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Phone number</label>
+                <input type="tel" pattern="[0-9]*" class="form-control" name="phoneNum" >
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Authority</label>
+                <select class="form-control" name="authority">
+                    <option value="customer">customer</option>
+                    <option value="admin">admin</option>
+                    <option value="staff">staff</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Enabled</label>
+                <select class="form-control" name="enabled">
+                    <option value="1">True</option>
+                    <option value="0">False</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </main>
+      </div>
+    </div>
+    <%-include('../template/footer')%>
+</body>
+<script>
+  function openModal() {
+ $(document).ready(function () {
+          $("#myModal").modal('show');
+      });
+  }
+ </script>
+</html>

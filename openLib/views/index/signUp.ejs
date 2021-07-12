@@ -24,7 +24,7 @@
 </head>
 
 <body onload="openModal()">
-    <% if(modal=='success') { 
+    <% if(locals.modal=='success') { 
         %>
         <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -52,6 +52,9 @@
             <div class="d-flex justify-content-center">
                 <div class="card" style="padding: 50px;">
                     <form action="/signUP" method="POST">
+                        <% if(locals.error) {  %>
+                            <p class="text-danger">Email is used</p>
+                            <%}%>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
@@ -74,7 +77,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phone number</label>
-                            <input type="number" class="form-control" name="phoneNum" aria-describedby="emailHelp">
+                            <input type="tel" pattern="[0-9]*" class="form-control" name="phoneNum" >
                         </div>
                         <input type="hidden" class="form-control" name="authority" value="customer" aria-describedby="emailHelp">
                         <input type="hidden" class="form-control" name="enabled" value="1" aria-describedby="emailHelp">

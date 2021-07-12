@@ -17,8 +17,10 @@
                <p><span class="spantext">Rating: </span><%= bookData.rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
                <p><span class="spantext">Description: </span><%= bookData.description%></p>
                <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>
-
             </div>
+        </div>
+        <div>
+            <a href="/book-borrow/<%= bookData._id %>" class="btn btn-outline-primary float-end">Borrow</a>
         </div>
         <div>
             <form>

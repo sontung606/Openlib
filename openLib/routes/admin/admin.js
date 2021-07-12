@@ -11,5 +11,11 @@ router.post('/admin/add-book',admin.postAddBook);
 router.get('/admin/delete-book/:Id',admin.getDeleteBook);
 router.get('/admin/update-book/:Id',admin.getUpdateBook);
 router.patch('/admin/update-book/:Id',admin.patchUpdateBook);
+router.get('/admin/create-account',admin.getCreateAccount);
+router.post('/admin/create-account',admin.postCreateAccount);
+router.get('/admin/update-account/:Id',admin.getUpdateAccount);
+router.post('/admin/update-account/:Id',admin.postUpdateAccount);
+router.get('/admin/detele-account/:Id',admin.getDeleteAccount);
+
 
 module.exports = router;    
