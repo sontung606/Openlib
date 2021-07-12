@@ -35,6 +35,24 @@ exports.postBookBorrow = (req, res, next) => {
     bookId: bookIdInput
   });
   BookBorrowNew.save()
-  next()
+  .then(()=>{
+    Book.findById(bookIdInput).then((result)=>{
+      res.render('books/bookBorrow', {
+        bookData: result,
+        moment: moment,
+        success:"Borrow book sucessful"
+      })
+    })
+  })
+  .catch((err)=>{
+    Book.findById(bookIdInput).then((result)=>{
+      res.render('books/bookBorrow', {
+        bookData: result,
+        moment: moment,
+        error:"Error please input correct information !!!"
+      })
+    })
+  })
+  
 }
 
