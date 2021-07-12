@@ -17,9 +17,7 @@
             <div class="row" style="background-color: whitesmoke;">
                 <%-include('../template/navbarCustomer')%>
                 <div class="col-md-10 p-5">
-
                     <h4>User information</h4>
-
                     <div class="p-3" style="background-color: white;">
                         <div class="row">
                             <form onSubmit="return validate();" >
@@ -28,7 +26,7 @@
                                         <label for="first">Firstname:</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input name="first" class="form-control"/>
+                                        <input name="first" class="form-control" value="<%=accountUser.firstname%>"/>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex mt-3">
@@ -36,7 +34,7 @@
                                         <label for="last">Last name:</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input name="last" class="form-control"/>
+                                        <input name="last" class="form-control" value="<%=accountUser.lastname%>"/>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex mt-3">
@@ -44,7 +42,7 @@
                                         <label for="phone">Phone number:</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input name="phone" class="form-control" />
+                                        <input name="phone" class="form-control" value="<%=accountUser.phoneNum%>" />
                                     </div>
                                 </div>
                                 <div class="form-group d-flex mt-3">
@@ -52,7 +50,7 @@
                                         <label for="email">Email:</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input name="email" class="form-control" />
+                                        <input name="email" class="form-control"  value="<%=accountUser.email%>"/>
                                     </div>
                                 </div>
                                 <!-- <div class="form-group d-flex mt-3">
@@ -75,7 +73,7 @@
                                         <label for="date">Date born:</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input name="date" class="form-control" type="date"/>
+                                        <input name="date" class="form-control" type="date" value="<%=date%>"/>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex mt-3">

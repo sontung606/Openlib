@@ -7,7 +7,7 @@ const lib = require('./routes/libRoutes/lib');
 const account = require('./routes/libRoutes/account');
 const book = require('./routes/libRoutes/book');
 const admin = require('./routes/admin/admin');
-const customer = require('./routes/libRoutes/customer');
+const customer = require('./routes/customer/customer');
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
 
