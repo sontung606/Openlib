@@ -14,18 +14,37 @@
             </div>
             <div class="col-8">
                <p><span class="spantext">Author: </span><%= bookData.author%> (author)</p>
-               <p><span class="spantext">Rating: </span><%= bookData.rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
+               <p><span class="spantext">Rating: </span><%= rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
                <p><span class="spantext">Description: </span><%= bookData.description%></p>
                <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>
             </div>
         </div>
-        <div>
-            <a href="/book-borrow/<%= bookData._id %>" class="btn btn-outline-primary float-end">Borrow</a>
+        <div class="row mb-5">
+            <div col-3>
+                <a href="/book-borrow/<%= bookData._id %>" class="btn btn-outline-primary float-end">Borrow</a>
+            </div>
+        </div>
+        <div class="mb-5">
+            <div class="card">
+                <div class="card-header">
+                    Comment
+                  </div>
+                <% for(RAC of bookData.RAC){%>
+                <div class="list-group list-group-flush">
+                    <li class="list-group-item">
+                    <p id="rcorners2"><%=RAC.accountId.firstname%><%=RAC.accountId.lastname%></p>
+                    <p><%=RAC.rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
+                    <p><%=RAC.comment%></p>
+                </li>
+                </div>
+                <%}%>
+              </div>
         </div>
         <div>
-            <form>
+            <form method="POST" action="/book-RAC">
+                <input type="hidden" name="id" value="<%=bookData._id%>">
             <h2>Comment</h2>
-            <textarea class="form-control" type="text"></textarea>
+            <textarea class="form-control" type="text" name="comment"></textarea>
             <h2>Rating</h2>
             <div class="row">
                 <div class="col-12">

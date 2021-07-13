@@ -4,6 +4,9 @@
 <head>
     <%-include('../template/head')%>
         <title>OpenLib</title>
+        <style>
+            
+        </style>
 </head>
 <body>
     <%-include('../template/navbar')%>
@@ -31,26 +34,26 @@
         <br>
         <div class="container bg-light ">
             <div class="row">
-            <% for (let books of booksData) { %>
-                <div class="col-3">
-                    <div>
-                        <div class="card mb-2"style="height: 520px;">
-                            <img src="<%=books.imageUrl%>" class="card-img-top" height="300px" width="100%" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">
-                                    <%=books.title%>
-                                </h5>
-                                <p class="card-text author"><%=books.author%> </p>
+                <% for (let books of booksData) { %>
+                    <div class="col-3 pb-2">
+                        <div class="card h-100 ">
+                            <img src="<%=books.imageUrl%>" class="card-img-top" height="400px" width="100%" alt="...">
+                            <div class="card-body" ">
+                                     <h5 class=" card-title fw-bold">
+                                        <%=books.title%>
+                                    </h5>
+                                    <p class="card-text author">
+                                        <%=books.author%>
+                                    </p>
                             </div>
                             <a href="/book-details/<%=books._id%>" style="background-color: #ffeaa7;">
-                            <div class="card-footer d-flex justify-content-center">
-                                Details
-                            </div>
+                                <div class="card-footer d-flex justify-content-center">
+                                    Details
+                                </div>
                             </a>
                         </div>
                     </div>
-                </div>
-                <% } %>
+                    <% } %>
             </div>
         </div>
         <%-include('../template/footer') %>
