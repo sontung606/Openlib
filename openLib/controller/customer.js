@@ -14,7 +14,15 @@ exports.patchCustomerInfo = (req, res, next) => {
     const id = req.params.id;
     const data = req.body;
     Account.findByIdAndUpdate({_id: id}, data).then((account) => {
-        res.render('customer/customerPage');
+        res.render('customer/customerPage'),{
+            _id: id,
+            email: data.email,
+            firstname: data.first,
+            lastname: data.last,
+            phoneNum: data.phone,
+            birthday: data.date,    
+            success: "Update info successfully!"
+        };
     })
 }
 
