@@ -7,5 +7,6 @@ router.get('/customer',isLogin, customer.getCustomer);
 router.get('/customer-order', isLogin,customer.getBookOrder);
 router.post('/customer-order/order', isLogin,customer.postBookOrders);
 router.put('/customer/update/:id', isLogin, customer.patchCustomerInfo);
+router.get('/customer/book-borrowed', isLogin,customer.getBookBorrow);
 
 module.exports = router;

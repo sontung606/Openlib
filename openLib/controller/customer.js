@@ -1,5 +1,9 @@
 const Account = require('../models/account');
 const BookOrders = require('../models/bookOrder');
+const BookBorrow = require('../models/booksBorrow');
+const { populate } = require('../models/book');
+const Book = require('../models/book');
+const moment = require('moment');
 
 // user change info
 exports.getCustomer = (req, res, next) => {
@@ -26,6 +30,17 @@ exports.patchCustomerInfo = (req, res, next) => {
     })
 }
 
+exports.getBookBorrow = (req, res, next) => {
+    const userId = req.session.accountData._id;
+    BookBorrow.find({accountId: userId})
+        .populate('bookId').then(result => {
+        res.render('customer/customerBorrowed',{
+            data: result,
+            moment: moment
+        })
+        console.log(result)
+    })
+}
 
 
 // user order book

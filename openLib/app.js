@@ -18,7 +18,7 @@ app.use(session({
   resave: true, 
   saveUninitialized: true, 
   secret: 'somesecret', 
-  cookie: { maxAge: 60000 }}));
+  cookie: { maxAge: 600000 }}));
 app.use(function(req, res, next) {
     res.locals.accountDataNav = req.session.accountData;
     next();
