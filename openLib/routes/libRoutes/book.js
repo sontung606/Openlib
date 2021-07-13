@@ -6,5 +6,6 @@ const isLogin = require('../../middleware/is-login')
 router.get('/book-details/:bookID',book.getbook);
 router.get('/book-borrow/:bookID',isLogin,book.getBookBorrow);
 router.post('/book-borrow',isLogin,book.postBookBorrow);
+router.post('/book-RAC',isLogin,book.postRAC);
 
 module.exports=router;

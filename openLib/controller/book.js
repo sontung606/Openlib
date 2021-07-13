@@ -1,16 +1,41 @@
 const Book = require('../models/book');
 const BookBorrow = require('../models/booksBorrow');
+const account = require('../models/account');
 var moment = require('moment');
+const { populate } = require('../models/book');
 
 exports.getbook = (req, res, next) => {
   const bookID = req.params.bookID;
   Book.findById(bookID)
+  .populate('RAC.accountId')
     .then(book => {
+      let sao =0;
+      for(ratingTotal of book.RAC){
+         sao = sao + ratingTotal.rating;
+      }
+      const rating =(sao/book.RAC.length).toFixed(1);
       res.render('books/bookdetail', {
         bookData: book,
+        rating:rating,
         moment: moment
       })
     })
+}
+exports.postRAC = (req, res, next) => {
+  const id = req.body.id;
+  const ratingInput = req.body.rate;
+  const commentInput = req.body.comment;
+  const RACInput={
+    accountId:req.session.accountData._id,
+    rating:ratingInput,
+    comment:commentInput
+  };
+  Book.findOne({_id:id}).then((result)=>{
+  result.RAC.push(RACInput);
+   Book.updateOne({_id:id},{RAC:result.RAC}).then(()=>{
+    res.redirect('/book-details/'+id);
+   })
+  })
 }
 exports.getBookBorrow = (req, res, next) => {
   const bookID = req.params.bookID;

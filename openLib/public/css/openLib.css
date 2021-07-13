@@ -147,3 +147,9 @@ input[type=checkbox] {
     height: 15px;
     -moz-appearance: none;
 }
+#rcorners2 {
+    border-radius: 15px;
+    border: 2px solid #73AD21;
+    padding: 10px;
+    width: min-content;
+  }

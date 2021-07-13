@@ -13,11 +13,18 @@ const bookSchema = new Schema({
     required: true,
     trim:true
     },
-    rating:{
-        type: Number,
-        required: true,
-        trim:true
-    },
+    RAC:[{
+        accountId:{
+            type: Schema.Types.ObjectId,
+            ref: 'account'
+        },
+        rating:{
+            type:Number
+        },
+        comment:{
+            type:String
+        }
+    }],
     categories:{
         type:String,
         required: true,
