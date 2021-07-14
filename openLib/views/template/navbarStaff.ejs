@@ -1,0 +1,61 @@
+<div class="col-md-2 d-none d-md-block p-3 sidebar nav-color">
+    <div class="d-flex">
+        <div class="pull-left m-2">
+            <i class="fas fa-users fa-2x"></i>
+        </div>
+        <div class="pull-right">
+            Hello:
+            <h6><strong><%=locals.accountDataNav.firstname%> <%=locals.accountDataNav.lastname%></strong></h6>
+        </div>
+    </div>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="/customer" class="nav-link link-dark link-bar" aria-current="page">
+                <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#home" />
+                </svg>
+                Account information
+            </a>
+        </li>
+        <li>
+            <a href="/customer/book-borrowed" class="nav-link link-dark link-bar">
+                <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#speedometer2" />
+                </svg>
+                Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="/customer-order" class="nav-link link-dark link-bar">
+                <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#table" />
+                </svg>
+                Orders
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link link-dark link-bar">
+                <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#grid" />
+                </svg>
+                Products
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link link-dark link-bar">
+                <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#people-circle" />
+                </svg>
+                Customers
+            </a>
+        </li>
+    </ul>
+    <hr>
+    <a href="#"
+        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <span>
+            <h5>Sign out</h5>
+        </span>
+    </a>
+</div>
