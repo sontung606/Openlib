@@ -8,8 +8,12 @@ const account = require('./routes/libRoutes/account');
 const book = require('./routes/libRoutes/book');
 const admin = require('./routes/admin/admin');
 const customer = require('./routes/customer/customer');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+const BookBorrow = require('./models/booksBorrow');
+const Account = require('./models/account');
+
+
 
 
 app.use(methodOverride('_method'))
@@ -37,6 +41,22 @@ mongoose
     'mongodb+srv://tung:tung@cluster0.n5p01.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true}
   )
   .then(result => {
+    setInterval(function(){
+    BookBorrow.find()
+    .then(result=>{
+      for(books of result){
+        if(Date.parse(books.dateReturn)< Date.now()){
+          let dateBanned = new Date(Date.now()+(Date.now()-Date.parse(books.dateReturn)));
+         Account.findOneAndUpdate({_id:books.accountId},{banned:dateBanned}).then(
+           console.log("nice")
+         );
+        }
+      }
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+    },86400000 );
     app.listen(3000);
   })
   .catch(err => {

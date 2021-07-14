@@ -13,7 +13,11 @@ exports.postLogin = (req, res, next) => {
           error: "Email or password is incorrect"
         })
       }
-      // if(result.banned > date)
+      if(result.banned > date){
+        return res.render('index/login', {
+          error: "Your account is locked please contact to admin for more information."
+        })
+      }
       if (result.password === (passInput)) {
         req.session.isLoggedIn = true;
         req.session.accountData = result;
