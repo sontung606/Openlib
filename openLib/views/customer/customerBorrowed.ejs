@@ -19,6 +19,11 @@
                     <h4>List of books read</h4>
                     <div class="p-3" style="background-color: white;">
                         <div class="row">
+                            <% if(success != '') {%>
+                                <div class="alert alert-success" role="alert">
+                                    <strong>Message</strong>: <%= success %>
+                                  </div>
+                                <% } %>
                             <table class="table table-hover table-striped">
                                 <thead>
                                     <tr>
@@ -27,7 +32,7 @@
                                         <th>Author</th>
                                         <th>Date borrow</th>
                                         <th>Date Return</th>
-                                        <th>Vote</th>
+                                        <th>Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -39,14 +44,11 @@
                                             <td><%= book.bookId.author %></td>
                                             <td><%= moment(book.dateBorrow).format('ddd ,DD/MM/YYYY')%></td>
                                             <td><%= moment(book.dateReturn).format('ddd ,DD/MM/YYYY')%></td>
+                                            <td style="color: #50CB93;">Ongoing</td>
                                             <td>
                                                 <a type="button" class="btn btn-info" href="/book-details/<%=book.bookId._id%>">
-                                                    Vote now 
-                                                    <i class="far fa-comment-alt"></i>
+                                                    Rating 
                                                 </a>
-                                            </td>
-                                            <td>
-                                                <%= book.bookId.RAC.comment %>
                                             </td>
                                         </tr>
                                     <% } %>

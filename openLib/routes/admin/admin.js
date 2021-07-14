@@ -18,6 +18,6 @@ router.post('/admin/create-account',isAdmin,admin.postCreateAccount);
 router.get('/admin/update-account/:Id',isAdmin,admin.getUpdateAccount);
 router.post('/admin/update-account/:Id',isAdmin,admin.postUpdateAccount);
 router.get('/admin/detele-account/:Id',isAdmin,admin.getDeleteAccount);
-
+router.get('/admin/all-request', isAdmin, admin.getAllRequest);
 
 module.exports = router;    

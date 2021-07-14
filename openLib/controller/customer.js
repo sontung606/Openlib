@@ -32,16 +32,16 @@ exports.patchCustomerInfo = (req, res, next) => {
 
 exports.getBookBorrow = (req, res, next) => {
     const userId = req.session.accountData._id;
-    BookBorrow.find({accountId: userId})
+    BookBorrow.find({accountId: userId, status: true})
         .populate('bookId').then(result => {
         res.render('customer/customerBorrowed',{
             data: result,
-            moment: moment
+            moment: moment,
+            success: ''
         })
         console.log(result)
     })
 }
-
 
 // user order book
 exports.getBookOrder = (req, res, next) => {

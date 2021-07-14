@@ -21,6 +21,10 @@ bookId:{
     type: Schema.Types.ObjectId,
     ref: 'books',
     require:true
+},
+status:{
+    type: Boolean,
+    default: true
 }
 });
 module.exports = mongoose.model('booksBorrow', bookSchema);
