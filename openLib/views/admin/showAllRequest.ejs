@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../template/head')%>
+        <title>Account list</title>
+                <script src="moment.js"></script>
+        <script>
+            moment().format();
+        </script>
+</head>
+
+<body>
+    <%-include('../template/navbar')%>
+        <div class="container-fluid">
+            <div class="row">
+
+                <%-include('../template/navbarAdmin')%>
+                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                        <div
+                            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                            <h1 class="h2">List request</h1>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" href="/admin/add-book">Add book</a>
+                        </div>
+                        <br>
+                        <table class="table table-hover table-striped table-primary">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Book name</th>
+                                    <th>Book author</th>
+                                    <th>Request date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(request of bookOrder) { %>
+                                    <tr>
+                                        <td>
+                                            <%=request.accountMail %>
+                                        </td>
+                                        <td>
+                                            <%=request.bookName%>
+                                        </td>
+                                        <td>
+                                            <%=request.bookAuthor%>
+                                        </td>
+                                        <td>
+                                            <%=moment(request.orderDate).format('ddd ,DD/MM/YYYY')%>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="link-danger"><i class="fa fa-check fa-lg" aria-hidden="true"></i></i></a>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                    </main>
+            </div>
+        </div>
+        <%-include('../template/footer')%>
+</body>
+</html>

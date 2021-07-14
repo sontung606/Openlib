@@ -7,11 +7,13 @@ exports.postLogin = (req, res, next) => {
   const passInput = req.body.password;
   Account.findOne({ email: emailInput })
     .then(result => {
+      const date = new Date();
       if (result.length <= 0) {
         return res.render('index/login', {
           error: "Email or password is incorrect"
         })
       }
+      // if(result.banned > date)
       if (result.password === (passInput)) {
         req.session.isLoggedIn = true;
         req.session.accountData = result;

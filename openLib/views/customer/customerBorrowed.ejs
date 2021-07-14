@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../template/head')%>
+        <title>Document</title>
+        <script src="moment.js"></script>
+        <script>
+            moment().format();
+        </script>
+</head>
+
+<body>
+    <%-include('../template/navbar')%>
+        <div class="container-fluid">
+            <div class="row" style="background-color: whitesmoke;">
+                <%-include('../template/navbarCustomer')%>
+                <div class="col-md-10 p-5">
+                    <h4>List of books read</h4>
+                    <div class="p-3" style="background-color: white;">
+                        <div class="row">
+                            <% if(success != '') {%>
+                                <div class="alert alert-success" role="alert">
+                                    <strong>Message</strong>: <%= success %>
+                                  </div>
+                                <% } %>
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Book Image</th>
+                                        <th>Name</th>
+                                        <th>Author</th>
+                                        <th>Date borrow</th>
+                                        <th>Date Return</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(book of data) { %>
+                                        <tr>
+                                            <td><img src="<%= book.bookId.imageUrl%>" alt="image" style="width: 150px; height: 200px"></td>
+                                            <td><%= book.bookId.title %></td>
+                                            <td><%= book.bookId.author %></td>
+                                            <td><%= moment(book.dateBorrow).format('ddd ,DD/MM/YYYY')%></td>
+                                            <td><%= moment(book.dateReturn).format('ddd ,DD/MM/YYYY')%></td>
+                                            <td style="color: #50CB93;">Ongoing</td>
+                                            <td>
+                                                <a type="button" class="btn btn-info" href="/book-details/<%=book.bookId._id%>">
+                                                    Rating 
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%-include('../template/footer')%>
+</body>
+
+</html>

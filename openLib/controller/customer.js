@@ -1,5 +1,9 @@
 const Account = require('../models/account');
 const BookOrders = require('../models/bookOrder');
+const BookBorrow = require('../models/booksBorrow');
+const { populate } = require('../models/book');
+const Book = require('../models/book');
+const moment = require('moment');
 
 // user change info
 exports.getCustomer = (req, res, next) => {
@@ -10,15 +14,26 @@ exports.getCustomer = (req, res, next) => {
         date: date
     });
 };
-exports.patchCustomerInfo = (req, res, next) => {
+exports.postUpdateCustomerInfo = (req, res, next) => {
     const id = req.params.id;
     const data = req.body;
     Account.findByIdAndUpdate({_id: id}, data).then((account) => {
-        res.render('customer/customerPage');
+        res.redirect('/logout');
     })
 }
 
-
+exports.getBookBorrow = (req, res, next) => {
+    const userId = req.session.accountData._id;
+    BookBorrow.find({accountId: userId, status: true})
+        .populate('bookId').then(result => {
+        res.render('customer/customerBorrowed',{
+            data: result,
+            moment: moment,
+            success: ''
+        })
+        console.log(result)
+    })
+}
 
 // user order book
 exports.getBookOrder = (req, res, next) => {

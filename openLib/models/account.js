@@ -42,6 +42,9 @@ const accountSchema = new Schema({
     enabled:{
         type:Boolean,
         require:true
+    },
+    banned:{
+        type: Date
     }
 })
 module.exports = mongoose.model('account', accountSchema);

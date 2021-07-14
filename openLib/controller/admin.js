@@ -1,5 +1,7 @@
 const Account = require('../models/account');
 const Book = require('../models/book');
+const BookOrder = require('../models/bookOrder');
+const moment = require('moment');
 
 
 exports.getAdmin = (req, res, next) => {
@@ -114,5 +116,14 @@ exports.getDeleteAccount = (req, res, next) => {
     const id = req.params.Id;
     Account.findByIdAndDelete({ _id: id }).then(() => {
         res.redirect('/admin/showaccount');
+    })
+}
+
+exports.getAllRequest = (req, res, next) => {
+    BookOrder.find().then(result => {
+        res.render('admin/showAllRequest', {
+            bookOrder : result,
+            moment: moment
+        })
     })
 }
