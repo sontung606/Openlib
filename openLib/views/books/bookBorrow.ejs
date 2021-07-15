@@ -34,7 +34,7 @@
         </div>
         <div class="col-8">
            <p><span class="spantext">Author: </span><%= bookData.author%> (author)</p>
-           <p><span class="spantext">Rating: </span><%= bookData.rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
+               <p><span class="spantext">Rating: </span><%= rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
            <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>
         </div>
     </div>
@@ -47,14 +47,23 @@
                 <label for="exampleInputEmail1" class="form-label">Date borrow</label>
                 <input type="date" name="dateBorrow" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
-            <div class="mb-3">
+            <%if(locals.accountDataNav.authority=="Lecturers"){%>
+                <input type="hidden" value="0" name="dateReturn" >
+            <%}else{%>
+              <div class="mb-3">
                 <label for="dateReturn" class="form-label">Return in:</label>
-                <select class="form-control" name="dateReturn" id="dateReturn">
-                <option value="2592000000">30 days</option>
-                <option value="5184000000">60 days</option>
-                <option value="7776000000">90 days</option>
+                <select class="form-control" name="dateReturn">
+                  <option value="86400000">1 days</option>
+                  <option value="172800000">2 days</option>
+                  <option value="259200000">3 days</option>
+                  <option value="345600000">4 days</option>
+                  <option value="432000000">5 days</option>
+                  <option value="518400000">6 days</option>
+                  <option value="604800000">7 days</option>
+                </select>
             </select>
             </div>
+            <%}%>
             <input type="hidden" name="bookId" value="<%=bookData._id%>">
         <button class="btn btn-outline-primary  float-end">Submit</button>
         </form>

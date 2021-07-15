@@ -24,7 +24,7 @@ bookId:{
 },
 status:{
     type: Boolean,
-    default: true
+    default: false
 }
 });
 module.exports = mongoose.model('booksBorrow', bookSchema);

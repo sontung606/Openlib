@@ -46,9 +46,9 @@ mongoose
     .then(result=>{
       for(books of result){
         if(Date.parse(books.dateReturn)< Date.now()){
+          console.log(Date.now())
           let dateBanned = new Date(Date.now()+(Date.now()-Date.parse(books.dateReturn)));
-         Account.findOneAndUpdate({_id:books.accountId},{banned:dateBanned}).then(
-           console.log("nice")
+          Account.findOneAndUpdate({_id:books.accountId},{banned:dateBanned}).then(
          );
         }
       }
@@ -56,7 +56,7 @@ mongoose
     .catch(err=>{
       console.log(err)
     })
-    },86400000 );
+    },86400000);
     app.listen(3000);
   })
   .catch(err => {
