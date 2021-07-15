@@ -35,16 +35,16 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
               </li>
-              <%}else if(locals.accountDataNav.authority === "customer"){%>
+              <%}else if(locals.accountDataNav.authority === "staff"){%>
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/customer">Welcome! <%= accountDataNav.firstname %></a>
+                  <a class="nav-link active" aria-current="page" href="/staff">Welcome! <%= accountDataNav.firstname %></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
                 </li>
                 <%}else{%>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/staff">Welcome! <%= accountDataNav.firstname %></a>
+                    <a class="nav-link active" aria-current="page" href="/customer">Welcome! <%= accountDataNav.firstname %></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
