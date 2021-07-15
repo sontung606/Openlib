@@ -37,7 +37,7 @@ app.use(staff);
 mongoose
   .connect(
     'mongodb+srv://tung:tung@cluster0.n5p01.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true}
-  )
+  ) 
   .then(result => {
     app.listen(3000);
   })
