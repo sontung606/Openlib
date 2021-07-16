@@ -21,6 +21,16 @@ exports.getbook = (req, res, next) => {
       })
     })
 }
+exports.getbookcate = (req, res, next) => {
+  const categories = req.params.categories;
+  Book.find({categories:categories}).then(result=>{
+    res.render('books/bookCategories',{
+      bookData:result,
+      categories:categories
+    })
+  })
+}
+
 exports.postRAC = (req, res, next) => {
   const id = req.body.id;
   const ratingInput = req.body.rate;

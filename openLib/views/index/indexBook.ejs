@@ -34,7 +34,12 @@
         <br>
         <div class="container bg-light ">
             <div class="row">
-                <% for (let books of booksData) { %>
+                <%for(bookCate of bookCategories){%>
+                    <%let numBook = 0;%>
+                    <h2 class="mb-4"><%=bookCate%></h2>
+                    <% for (let books of booksData) { %>
+                         <%if(books.categories==bookCate){%>
+                            <%if(numBook==4){break;}%>
                     <div class="col-3 pb-2">
                         <div class="card h-100 ">
                             <img src="<%=books.imageUrl%>" class="card-img-top" height="400px" width="100%" alt="...">
@@ -53,7 +58,14 @@
                             </a>
                         </div>
                     </div>
+                        <%numBook++}%>
                     <% } %>
+                    <div style="text-align: end;">
+                        <div >
+                            <a href="/book-categories/<%=bookCate%>"><button class="btn btn-success">See more</button></a>
+                        </div>
+                    </div>
+                <%}%>
             </div>
         </div>
         <%-include('../template/footer') %>
