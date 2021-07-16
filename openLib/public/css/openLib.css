@@ -145,7 +145,7 @@ a:hover{
 input[type=checkbox] {
     width: 15px;
     height: 15px;
-    -moz-appearance: none;
+
 }
 #rcorners2 {
     border-radius: 15px;

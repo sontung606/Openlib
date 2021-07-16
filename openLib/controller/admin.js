@@ -19,7 +19,8 @@ exports.getAllAccount = (req, res, next) => {
 exports.getAllBook = (req, res, next) => {
     Book.find().then(result => {
         res.render('admin/showAllBook', {
-            bookData: result
+            bookData: result,
+            moment:moment
         });
     })
 }
@@ -57,6 +58,7 @@ exports.getUpdateBook = (req, res, next) => {
 exports.patchUpdateBook = (req, res, next) => {
     const id = req.params.Id;
     const data = req.body;
+    console.log(data)
     Book.findOneAndUpdate({ _id: id }, data).then(result => {
         res.redirect('/admin/showAllBook');
     })
