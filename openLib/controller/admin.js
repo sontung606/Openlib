@@ -83,7 +83,7 @@ exports.getCreateAccount = (req, res, next) => {
 }
 exports.postCreateAccount = (req, res, next) => {
     const emailInput = req.body.email;
-    const passInput = req.body.pass;
+    const passInput = req.body.password;
     const firstnameInput = req.body.firstname;
     const lastnameInput = req.body.lastname;
     const birthdayInput = req.body.birthday;
