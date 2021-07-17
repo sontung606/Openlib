@@ -36,8 +36,9 @@ exports.postAddBook = (req, res, next) => {
     const imageUrlInput = req.body.imageUrl;
     const categoriesInput = req.body.categories;
     const book = new Book({ title: titleInput, author: authorInput, rating: ratingInput, description: descriptionInput, published_date: published_dateInput, imageUrl: imageUrlInput, categories: categoriesInput });
-    book.save()
-    res.redirect('/admin/add-book')
+    book.save().then(()=>{
+        res.redirect('/admin/add-book')
+    })
 };
 exports.getDeleteBook = (req, res, next) => {
     const id = req.params.Id;

@@ -37,7 +37,7 @@
                 <%for(bookCate of bookCategories){%>
                     <%let numBook = 0;%>
                     <h2 class="mb-4"><%=bookCate%></h2>
-                    <% for (let books of booksData) { %>
+                    <% for (books of booksData) { %>
                          <%if(books.categories==bookCate){%>
                             <%if(numBook==4){break;}%>
                     <div class="col-3 pb-2">
