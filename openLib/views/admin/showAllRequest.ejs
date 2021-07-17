@@ -4,13 +4,14 @@
 <head>
     <%-include('../template/head')%>
         <title>Account list</title>
-                <script src="moment.js"></script>
-        <script>
-            moment().format();
-        </script>
 </head>
 
 <body>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
     <%-include('../template/navbar')%>
         <div class="container-fluid">
             <div class="row">
@@ -25,7 +26,7 @@
                             <a class="btn btn-primary" href="/admin/add-book">Add book</a>
                         </div>
                         <br>
-                        <table class="table table-hover table-striped table-primary">
+                        <table class="table table-hover table-striped table-light" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Name</th>
