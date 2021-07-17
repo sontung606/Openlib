@@ -1,25 +1,20 @@
 const moment = require('moment');
 const Book = require('../models/book');
 exports.getIndex = (req, res, next) => {
+  let bookCategories ;
+    Book.find().distinct('categories',function(err,result)  {
+      bookCategories=result;
+    });
+
     Book.find()
-      .then( (books) => {
-        if(req.session.accountData)
-        {
-          const accountData= req.session.accountData;
-          res.render('index/indexBook', {
-            booksData: books,
-            accountData:accountData,
-            moment:moment,
-            path: '/'
-          });        
-        }
-        else{
+      .then((books) => {
+       
           res.render('index/indexBook', {
             booksData: books,
             moment:moment,
+            bookCategories:bookCategories,
             path: '/'
-          });   
-        }     
+          });     
       })
       .catch(err => {
         console.log(err);
