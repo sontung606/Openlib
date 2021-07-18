@@ -4,9 +4,6 @@
 <head>
     <%-include('../template/head')%>
         <title>OpenLib</title>
-        <style>
-            
-        </style>
 </head>
 <body>
     <%-include('../template/navbar')%>
@@ -18,13 +15,17 @@
                 </div>
                 <div class="p-2 bd-highlight">Shop Online with Bookshop.</div>
                 <div>
-                    <form>
+                    <form method="GET" action="/book-search/">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Book's name, author..."
-                                aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-secondary" type="button" id="button-addon2">Search</button>
+                                aria-label="Recipient's username" aria-describedby="button-addon2" name="search">
+                            <button class="btn btn-secondary" type="submit" id="button-addon2">Search</button>
+                            <input type="hidden" name="cate" value="All">
                         </div>
                     </form>
+                    <div style="text-align: end;">
+                        <a href=/book-search class="btn btn-success">Details search</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,14 +62,14 @@
                         <%numBook++}%>
                     <% } %>
                     <div style="text-align: end;">
-                        <div >
-                            <a href="/book-categories/<%=bookCate%>"><button class="btn btn-success">See more</button></a>
+                        <div>
+                            <a href="/book-search?cate=<%=encodeURIComponent(bookCate)%>&search=&page=1"><button class="btn btn-success">See more</button></a>
                         </div>
                     </div>
                 <%}%>
             </div>
         </div>
-        <%-include('../template/footer') %>
-</body>
 
+</body>
+<%-include('../template/footer') %>
 </html>

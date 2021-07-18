@@ -5,8 +5,8 @@ const isLogin = require('../../middleware/is-login')
 
 router.get('/book-details/:bookID',book.getbook);
 router.get('/book-borrow/:bookID',isLogin,book.getBookBorrow);
-router.get('/book-categories/:categories',book.getbookcate);
 router.post('/book-borrow',isLogin,book.postBookBorrow);
 router.post('/book-RAC',isLogin,book.postRAC);
+router.get('/book-search',book.getBookSearch);
 
 module.exports=router;
