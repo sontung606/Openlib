@@ -4,7 +4,7 @@ const account = require('../models/account');
 var moment = require('moment');
 const { populate } = require('../models/book');
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 4;
 
 exports.getBookSearch =async (req, res, next) => {
   const page = parseInt(req.query.page);
@@ -18,7 +18,7 @@ exports.getBookSearch =async (req, res, next) => {
       let bookCategories = result;
         res.render('books/bookCategories',{
         bookData:null,
-        bookCategories:bookCategories,
+        bookCategories:bookCategories
       })
     });
   }
@@ -89,6 +89,7 @@ exports.getBookSearch =async (req, res, next) => {
    })
   }
 }
+
 exports.getbook = (req, res, next) => {
   const bookID = req.params.bookID;
   Book.findById(bookID)
@@ -106,8 +107,21 @@ exports.getbook = (req, res, next) => {
       })
     })
 }
-
-
+exports.getRACDelete=(req,res,next)=>{
+  const RACId= req.params.bookRACID;
+  const bookId= req.params.bookID;
+  Book.findById(bookId).then(book=>{
+    for(let i = 0; i<book.RAC.length;i++){
+      if(book.RAC[i]._id== RACId){
+        book.RAC.splice(i,1);
+        break;
+      }
+    }
+    Book.findByIdAndUpdate({_id:bookId},book).then(()=>{
+      res.redirect('/book-details/'+bookId);
+    });
+  })
+}
 exports.postRAC = (req, res, next) => {
   const id = req.body.id;
   const ratingInput = req.body.rate;
@@ -125,7 +139,6 @@ exports.postRAC = (req, res, next) => {
   })
 }
 
-
 exports.getBookBorrow = (req, res, next) => {
   const bookID = req.params.bookID;
   Book.findById(bookID)
@@ -142,7 +155,6 @@ exports.getBookBorrow = (req, res, next) => {
       })
     })
 }
-
 
 exports.postBookBorrow = (req, res, next) => {
   const dateBorrowInput = Date.parse(req.body.dateBorrow);
