@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <%-include('../template/head')%>
-    <title><%=categories%> </title>
+    <title><%=locals.categories%> </title>
 </head>
 <body>
     <%-include('../template/navbar')%>
+    <%-include('../template/searchbar')%>
     <div class="container bg-light ">
         <div class="row">
+        <%if(bookData){%>
         <% for ( books of bookData) { %>
             <div class="col-3 pb-2">
                 <div class="card h-100 ">
@@ -27,9 +29,17 @@
                     </a>
                 </div>
             </div>
+         <%}%>
+         <%}else{%>
         <%}%>
         </div>
+        <div style="text-align: center;">
+            <%while(locals.firstPage <= locals.lastPage ){%>
+                <a class="btn btn-danger" href="<%=url.replace('page='+ currentPage ,'page='+ firstPage )%>"><%=firstPage%></a>
+            <%firstPage++;}%> 
+        </div>
+        <br>
     </div>
-    <%-include('../template/footer')%>
 </body>
+<%-include('../template/footer')%>
 </html>
