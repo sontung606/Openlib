@@ -13,8 +13,10 @@
         <% for ( books of bookData) { %>
             <div class="col-3 pb-2">
                 <div class="card h-100 ">
-                    <img src="<%=books.imageUrl%>" class="card-img-top" height="400px" width="100%" alt="...">
-                    <div class="card-body" ">
+                    <a href="/book-details/<%=books._id%>">
+                        <img src="<%=books.imageUrl%>" class="card-img-top" height="400px" width="100%" alt="...">
+                    </a>
+                        <div class="card-body">
                              <h5 class=" card-title fw-bold">
                                 <%=books.title%>
                             </h5>

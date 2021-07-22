@@ -5,6 +5,7 @@
     <%-include('../template/head')%>
         <title>OpenLib</title>
 </head>
+
 <body>
     <%-include('../template/navbar')%>
         <div class="styleText d-flex justify-content-center align-items-center flex-column bd-highlight"
@@ -37,40 +38,48 @@
         <div class="container bg-light ">
             <div class="row">
                 <%for(bookCate of bookCategories){%>
-                    <%let numBook = 0;%>
-                    <h2 class="mb-4"><%=bookCate%></h2>
-                    <% for (books of booksData) { %>
-                         <%if(books.categories==bookCate){%>
-                            <%if(numBook==4){break;}%>
-                    <div class="col-3 pb-2">
-                        <div class="card h-100 ">
-                            <img src="<%=books.imageUrl%>" class="card-img-top" height="400px" width="100%" alt="...">
-                            <div class="card-body" ">
-                                     <h5 class=" card-title fw-bold">
-                                        <%=books.title%>
-                                    </h5>
-                                    <p class="card-text author">
-                                        <%=books.author%>
-                                    </p>
-                            </div>
-                            <a href="/book-details/<%=books._id%>" style="background-color: #ffeaa7;">
-                                <div class="card-footer d-flex justify-content-center">
-                                    Details
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                        <%numBook++}%>
-                    <% } %>
-                    <div style="text-align: end;">
-                        <div>
-                            <a href="/book-search?cate=<%=encodeURIComponent(bookCate)%>&search=&page=1"><button class="btn btn-success">See more</button></a>
-                        </div>
-                    </div>
-                <%}%>
+                    <%let numBook=0;%>
+                        <h2 class="mb-4">
+                            <%=bookCate%>
+                        </h2>
+                        <% for (books of booksData) { %>
+                            <%if(books.categories==bookCate){%>
+                                <%if(numBook==4){break;}%>
+                                    <div class="col-3 pb-2">
+                                        <div class="card h-100 ">
+                                            <a href="/book-details/<%=books._id%>">
+                                                <img src="<%=books.imageUrl%>" class="card-img-top" height="400px"
+                                                    width="100%" alt="...">
+                                            </a>
+                                            <div class="card-body">
+                                                <h5 class=" card-title fw-bold">
+                                                    <%=books.title%>
+                                                </h5>
+                                                <p class="card-text author">
+                                                    <%=books.author%>
+                                                </p>
+                                            </div>
+                                            <a href="/book-details/<%=books._id%>" style="background-color: #ffeaa7;">
+                                                <div class="card-footer d-flex justify-content-center">
+                                                    Details
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <%numBook++}%>
+                                        <% } %>
+                                            <div style="text-align: end;">
+                                                <div>
+                                                    <a
+                                                        href="/book-search?cate=<%=encodeURIComponent(bookCate)%>&search=&page=1"><button
+                                                            class="btn btn-success">See more</button></a>
+                                                </div>
+                                            </div>
+                                            <%}%>
             </div>
         </div>
 
 </body>
 <%-include('../template/footer') %>
+
 </html>
