@@ -20,4 +20,6 @@ router.post('/admin/update-account/:Id',isAdmin,admin.postUpdateAccount);
 router.get('/admin/detele-account/:Id',isAdmin,admin.getDeleteAccount);
 router.get('/admin/all-request', isAdmin, admin.getAllRequest);
 
+router.get('/admin/dashboard' , isAdmin, admin.getDashboard);
+
 module.exports = router;    

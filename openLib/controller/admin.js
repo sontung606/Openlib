@@ -130,3 +130,7 @@ exports.getAllRequest = (req, res, next) => {
         })
     })
 }
+
+exports.getDashboard = (req, res, next) => {
+    res.render('admin/testChart')
+}
