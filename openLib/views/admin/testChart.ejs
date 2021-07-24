@@ -1,52 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <%-include('../template/head')%>
-    <title>Document</title>
+  <%-include('../template/head')%>
+    <title>Account list</title>
 </head>
+
 <body>
-    <%-include('../template/navbar')%>
-
-    <!-- <div class="container-fluid">
-        <div class="row">
-         
-          <%-include('../template/navbarAdmin')%>
-
-          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-              <h1 class="h2">Dashboard</h1>
-              <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group mr-2">
-                  <button class="btn btn-sm btn-outline-secondary">Share</button>
-                  <button class="btn btn-sm btn-outline-secondary">Export</button>
-                </div>
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                  <span data-feather="calendar"></span>
-                  This week
-                </button>
-              </div>
-            </div>
-          </main>
+  <nav class="navbar navbar-expand-lg navbar-light navbar-inverse">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">OpenLib</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="myNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown" id="myDropdown">
+            <a class="nav-link" href="#"> Treeview menu </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link" href="#">abc</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">abcd</a></li>
+              <li id="sub-dropdown" class="dropdown"><a class="nav-link" href="#">Sex Viet<i
+                    class="fas fa-chevron-right" style="margin-left: 30px;"></i></a>
+                <ul id="sub-dropdown-menu" class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link" href="#">Comic</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Sex</a></li>
+                </ul>
+              </li>
+              <li id="sub-dropdown" class="dropdown"><a class="nav-link" href="#">Sex Tau<i
+                class="fas fa-chevron-right" style="margin-left: 30px;"></i></a>
+            <ul id="sub-dropdown-menu" class="dropdown-menu">
+              <li class="nav-item"><a class="nav-link" href="#">Comic</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Sex</a></li>
+            </ul>
+          </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <% if(locals.accountDataNav){%>
+              <%if(locals.accountDataNav.authority==="admin" ){ %>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/admin">Welcome! <%= accountDataNav.firstname %>
+                      </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
+                </li>
+                <%}else if(locals.accountDataNav.authority==="staff" ){%>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/staff">Welcome! <%= accountDataNav.firstname
+                        %></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
+                  </li>
+                  <%}else{%>
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="/customer">Welcome! <%=
+                          accountDataNav.firstname %></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
+                    </li>
+                    <%}%>
+                      <% }else {%>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="/signup">Sign up</a>
+                        </li>
+                        <% }%>
+          </ul>
         </div>
-      </div> -->
-      <canvas id="lineChart" height="400" width="400"></canvas>
-
-    <%-include('../template/footer')%>
-    <script>
-      const chart = document.getElementById("lineChart");
-let lineChart = new Chart(chart, {
-    type: 'line',
-    data: {
-        labels: labels,
-        datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-        }]
-    }
-});
-    </script>
+      </div>
+    </div>
+  </nav>
 </body>
+
 </html>

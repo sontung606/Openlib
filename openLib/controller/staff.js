@@ -37,5 +37,8 @@ exports.getConfirmBorrows = (req, res, next) => {
     .catch(err=>{
         console.log(err);
     })
-  
+}
+
+exports.postStaffBorrowForCustomer = (req, res, next) => {
+    
 }
