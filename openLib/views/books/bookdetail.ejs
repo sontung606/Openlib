@@ -13,7 +13,8 @@
                 <img class="img-thumbnail" src="<%= bookData.imageUrl%>" alt="<%= bookData.imageUrl%>">
             </div>
             <div class="col-8">
-               <p><span class="spantext">Author: </span><%= bookData.author%> (author)</p>
+               <p><span class="spantext">Author: </span><%= bookData.author%></p>
+               <p><span class="spantext">Category: </span><%= bookData.categories%></p>
                <p><span class="spantext">Rating: </span><%= rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
                <p><span class="spantext">Description: </span><%= bookData.description%></p>
                <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>

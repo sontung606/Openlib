@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const Account = require('../models/account');
 exports.getLogin = (req, res, next) => {
   res.render('index/login');
@@ -13,7 +14,7 @@ exports.postLogin = (req, res, next) => {
           error: "Email or password is incorrect"
         })
       }
-      if (result.password === (passInput)) {
+      if (bcrypt.compareSync(passInput, result.password)) {
         if(result.banned > date){
           return res.render('index/login', {
             error: "Your account is locked please contact to admin for more information."
@@ -49,6 +50,7 @@ exports.getSignUp = (req, res, next) => {
   })
 }
 exports.postSignUp = (req, res, next) => {
+  const saltRounds = 10;
   const emailInput = req.body.email;
   const passInput = req.body.pass;
   const firstnameInput = req.body.firstname;
@@ -57,9 +59,10 @@ exports.postSignUp = (req, res, next) => {
   const phoneInput = req.body.phoneNum;
   const authorityInput = req.body.authority;
   const enabledInput = req.body.enabled;
+  const hashPass = bcrypt.hashSync(passInput, saltRounds);
   const account = new Account({
     email: emailInput,
-    password: passInput,
+    password: hashPass,
     firstname: firstnameInput,
     lastname: lastnameInput,
     birthday: birthdayInput,

@@ -2,7 +2,7 @@ const Account = require('../models/account');
 const Book = require('../models/book');
 const BookOrder = require('../models/bookOrder');
 const moment = require('moment');
-
+const bcrypt = require('bcrypt');
 
 exports.getAdmin = (req, res, next) => {
     res.render('admin/adminpage');
@@ -85,6 +85,7 @@ exports.getCreateAccount = (req, res, next) => {
     res.render('admin/accountCreate');
 }
 exports.postCreateAccount = (req, res, next) => {
+    const saltRounds = 10;
     const emailInput = req.body.email;
     const passInput = req.body.password;
     const firstnameInput = req.body.firstname;
@@ -93,9 +94,10 @@ exports.postCreateAccount = (req, res, next) => {
     const phoneInput = req.body.phoneNum;
     const authorityInput = req.body.authority;
     const enabledInput = req.body.enabled;
+    const hashPass = bcrypt.hashSync(passInput, saltRounds);
     const account = new Account({
         email: emailInput,
-        password: passInput,
+        password: hashPass,
         firstname:firstnameInput,
         lastname:lastnameInput,
         birthday:birthdayInput,

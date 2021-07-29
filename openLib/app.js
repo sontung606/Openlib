@@ -34,7 +34,6 @@ app.use(book);
 app.use(admin);
 app.use(customer);
 app.use(staff);
-// app.use(errorController.get404);
 
 mongoose
   .connect(
