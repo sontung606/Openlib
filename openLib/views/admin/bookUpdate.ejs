@@ -15,9 +15,8 @@
             <div
               class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
               <h1 class="h2">Book update</h1>
-
             </div>
-            <form method="POST" action="/admin/update-book/<%=BookData._id%>?_method=PATCH">
+            <form method="POST" action="/admin/update-book/<%=BookData._id%>?_method=PATCH" enctype="multipart/form-data">
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Title</label>
                 <input type="text" class="form-control" name="title" value="<%=BookData.title%>">
@@ -40,8 +39,8 @@
 
               </div>
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">imageUrl</label>
-                <input type="text" class="form-control" name="imageUrl"value="<%=BookData.imageUrl%>">
+                <label for="formFile" class="form-label">Image</label>
+                <input class="form-control" type="file" id="image" name="image">
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>

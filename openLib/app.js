@@ -13,10 +13,20 @@ const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
 const BookBorrow = require('./models/booksBorrow');
 const Account = require('./models/account');
+const multer = require('multer');
 
+const fileStorage = multer.diskStorage({
+  destination:(req, file, cb)=>{
+    cb(null,'public/image')
+  },
+  filename:(req, file, cb)=>{
+    cb(null,file.originalname);
+  }
+});
 
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true}));
+app.use(multer({storage:fileStorage}).single('image'))
 app.use(session({
   resave: true, 
   saveUninitialized: true, 
@@ -28,6 +38,7 @@ app.use(function(req, res, next) {
 });
 app.set('view engine','ejs');
 app.use(express.static(path.join(__dirname,'public')));
+app.use('/public',express.static(path.join(__dirname,'public')));
 app.use(lib);
 app.use(account);
 app.use(book);

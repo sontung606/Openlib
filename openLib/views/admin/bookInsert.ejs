@@ -17,7 +17,7 @@
               <h1 class="h2">Add book</h1>
 
             </div>
-            <form method="POST" action="/admin/add-book">
+            <form method="POST" action="/admin/add-book" enctype="multipart/form-data">
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Title</label>
                 <input type="text" class="form-control" name="title">
@@ -26,11 +26,6 @@
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Author</label>
                 <input type="text" class="form-control" name="author">
-
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Rating</label>
-                <input type="text" class="form-control" name="rating">
 
               </div>
               <div class="mb-3">
@@ -44,12 +39,10 @@
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">published_date</label>
                 <input type="date" class="form-control" name="published_date">
-
               </div>
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">imageUrl</label>
-                <input type="text" class="form-control" name="imageUrl">
-
+                <label for="formFile" class="form-label">Image</label>
+                <input class="form-control" type="file" id="image" name="image">
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>

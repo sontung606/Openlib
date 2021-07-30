@@ -33,7 +33,7 @@ exports.postAddBook = (req, res, next) => {
     const ratingInput = req.body.rating;
     const descriptionInput = req.body.description;
     const published_dateInput = req.body.published_date;
-    const imageUrlInput = req.body.imageUrl;
+    const imageUrlInput = req.file.path;
     const categoriesInput = req.body.categories;
     const book = new Book({ title: titleInput, author: authorInput, rating: ratingInput, description: descriptionInput, published_date: published_dateInput, imageUrl: imageUrlInput, categories: categoriesInput });
     book.save().then(()=>{
@@ -59,7 +59,8 @@ exports.getUpdateBook = (req, res, next) => {
 exports.patchUpdateBook = (req, res, next) => {
     const id = req.params.Id;
     const data = req.body;
-    console.log(data)
+    const imageUrlInput = req.file.path;
+    data.imageUrl=imageUrlInput;
     Book.findOneAndUpdate({ _id: id }, data).then(result => {
         res.redirect('/admin/showAllBook');
     })
