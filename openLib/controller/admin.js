@@ -77,9 +77,21 @@ exports.getUpdateAccount = (req, res, next) => {
 exports.postUpdateAccount = (req, res, next) => {
     const id = req.params.Id;
     const data = req.body;
-    Account.findOneAndUpdate({ _id: id }, data).then(result => {
-        res.redirect('/admin/showaccount');
-    })
+    if(data.password ==="" || data.password==null){
+        delete data.password;
+        Account.findOneAndUpdate({ _id: id }, data).then(result => {
+            res.redirect('/admin/showaccount');
+        })
+    }
+    else {
+        const saltRounds = 10;
+        const hashPass = bcrypt.hashSync(data.password, saltRounds);
+        data.password = hashPass;
+        Account.findOneAndUpdate({ _id: id }, data).then(result => {
+            res.redirect('/admin/showaccount');
+        })
+    }
+    
 }
 exports.getCreateAccount = (req, res, next) => {
     res.render('admin/accountCreate');

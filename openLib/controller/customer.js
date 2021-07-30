@@ -4,6 +4,8 @@ const BookBorrow = require('../models/booksBorrow');
 const { populate } = require('../models/book');
 const Book = require('../models/book');
 const moment = require('moment');
+const bcrypt = require('bcrypt');
+
 
 // user change info
 exports.getCustomer = (req, res, next) => {
@@ -17,24 +19,37 @@ exports.getCustomer = (req, res, next) => {
 exports.postUpdateCustomerInfo = (req, res, next) => {
     const id = req.params.id;
     const data = req.body;
-    if(req.body.hiddenpw == ''){
-        if(req.body.crtpassword === req.session.accountData.password){
-            const npw = req.body.newpassword;
+    if(req.body.crtpassword === "" && req.body.newpassword ===""){
+        console.log("yes")
+        Account.findByIdAndUpdate({ _id: id }, data).then((account) => {
+            res.redirect('/logout');
+        })
+    }
+    else{
+        if(bcrypt.compareSync(req.body.crtpassword, req.session.accountData.password)){
+            const saltRounds = 10;
+            const hashPass = bcrypt.hashSync(req.body.newpassword, saltRounds);
             Account.findByIdAndUpdate({ _id: id },{
                 firstname : data.firstname,
                 lastname : data.lastname,
                 phoneNum : data.phoneNum,
                 birthday : data.birthday,
-                password : npw
+                password : hashPass
             }).then((account) => {
                 res.redirect('/logout');
             })
         }
-    }else{
-        Account.findByIdAndUpdate({ _id: id }, data).then((account) => {
-            res.redirect('/logout');
-        })
+        else{
+            const accountUser = req.session.accountData;
+            const date = new Date(accountUser.birthday).toLocaleDateString('en-CA');
+            res.render('customer/customerPage', {
+                accountUser: accountUser,
+                date: date,
+                err:"Wrong password"
+            });
+        }
     }
+    
 }
 
 // exports.postUpdateCustomerPassword = (req, res, next) => {

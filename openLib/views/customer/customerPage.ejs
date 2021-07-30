@@ -22,7 +22,9 @@
                         <div class="p-3" style="background-color: white;">
                             <div class="row">
                                 <form onsubmit="return validate()" action="/customer/update/<%=accountUser._id%>" method="POST" novalidate>
-                                    <input hidden name="hiddenpw" id="hiddenpw" value="<%=accountUser.password%>"/>
+                                    <%if(locals.err){%>
+                                        <p class="text-danger"><%=err%></p>
+                                    <%}%>
                                     <div class="form-group d-flex">
                                         <div class="col-lg-2">
                                             <label for="firstname">Firstname:</label>

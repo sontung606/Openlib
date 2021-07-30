@@ -1,12 +1,10 @@
 function onCustomerToggle() {
     var x = document.getElementById("passwordChanger");
     if (x.style.display === "none") {
-        document.getElementById("hiddenpw").value = '';
         x.style.display = "block";
     } else {
         x.style.display = "none";
-        document.getElementById("hiddenpw").value = '<%=accountUser.password%>';
-}
+    }
 }
 
 function validate() {
