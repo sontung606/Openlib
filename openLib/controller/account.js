@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const Account = require('../models/account');
+const Authorities = require('../models/authorities');
 exports.getLogin = (req, res, next) => {
   res.render('index/login');
 }
@@ -7,6 +8,7 @@ exports.postLogin = (req, res, next) => {
   const emailInput = req.body.email;
   const passInput = req.body.password;
   Account.findOne({ email: emailInput })
+    .populate('authority')
     .then(result => {
       const date = new Date();
       if (result.length <= 0) {
@@ -57,22 +59,23 @@ exports.postSignUp = (req, res, next) => {
   const lastnameInput = req.body.lastname;
   const birthdayInput = req.body.birthday;
   const phoneInput = req.body.phoneNum;
-  const authorityInput = req.body.authority;
   const enabledInput = req.body.enabled;
   const hashPass = bcrypt.hashSync(passInput, saltRounds);
-  const account = new Account({
-    email: emailInput,
-    password: hashPass,
-    firstname: firstnameInput,
-    lastname: lastnameInput,
-    birthday: birthdayInput,
-    phoneNum: phoneInput,
-    authority: authorityInput,
-    enabled: enabledInput
-  });
-  account.save().then(() => {
-    res.render('index/signUp', {
-      modal: "success"
+  Authorities.findOne({authority:"customer"}).then((result)=>{
+    const account = new Account({
+      email: emailInput,
+      password: hashPass,
+      firstname: firstnameInput,
+      lastname: lastnameInput,
+      birthday: birthdayInput,
+      phoneNum: phoneInput,
+      authority: result._id,
+      enabled: enabledInput
+    });
+    account.save().then(() => {
+      res.render('index/signUp', {
+        modal: "success"
+      })
     })
   })
   .catch((err) => {

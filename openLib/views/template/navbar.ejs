@@ -18,7 +18,7 @@
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <% if(locals.accountDataNav){%>
-            <%if(locals.accountDataNav.authority==="admin" ){ %>
+            <%if(locals.accountDataNav.authority.authority==="admin" ){ %>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/admin">Welcome! <%= accountDataNav.firstname %>
                 </a>
@@ -26,7 +26,7 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
               </li>
-              <%}else if(locals.accountDataNav.authority==="staff" ){%>
+              <%}else if(locals.accountDataNav.authority.authority==="staff" ){%>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="/staff">Welcome! <%= accountDataNav.firstname %>
                   </a>

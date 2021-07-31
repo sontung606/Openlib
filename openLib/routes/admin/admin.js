@@ -19,7 +19,12 @@ router.get('/admin/update-account/:Id',isAdmin,admin.getUpdateAccount);
 router.post('/admin/update-account/:Id',isAdmin,admin.postUpdateAccount);
 router.get('/admin/detele-account/:Id',isAdmin,admin.getDeleteAccount);
 router.get('/admin/all-request', isAdmin, admin.getAllRequest);
-
 router.get('/admin/dashboard' , isAdmin, admin.getDashboard);
+router.get('/admin/showAllAuth',isAdmin,admin.getAuth);
+router.get('/admin/create-authority',isAdmin,admin.getCreateAuth);
+router.post('/admin/create-authority',isAdmin,admin.postAddAuth);
+router.get('/admin/delete-auth/:Id',isAdmin,admin.getDeteleAuth);
+router.get('/admin/update-auth/:Id',isAdmin,admin.getUpdateAuth);
+router.post('/admin/update-auth/:Id',isAdmin,admin.postUpdateAuth);
 
 module.exports = router;    

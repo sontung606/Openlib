@@ -5,7 +5,6 @@
   <%-include('../template/head')%>
     <title>account update</title>
 </head>
-
 <body>
   <%-include('../template/navbar')%>
     <div class="container-fluid mb-3">
@@ -45,9 +44,9 @@
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Authority</label>
                 <select class="form-control" name="authority">
-                    <option value="customer">customer</option>
-                    <option value="admin">admin</option>
-                    <option value="staff">staff</option>
+                  <%for(auth of locals.authList){%>
+                    <option value="<%=auth._id%>"><%=auth.authority%></option>
+                  <%}%>
                 </select>
               </div>
               <div class="mb-3">

@@ -47,7 +47,7 @@
                 <label for="exampleInputEmail1" class="form-label">Date borrow</label>
                 <input type="date" name="dateBorrow" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
-            <%if(locals.accountDataNav.authority=="Lecturers"){%>
+            <%if(locals.accountDataNav.authority.authority=="lecturers"){%>
                 <input type="hidden" value="0" name="dateReturn" >
             <%}else{%>
               <div class="mb-3">

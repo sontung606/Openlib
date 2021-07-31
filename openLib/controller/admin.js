@@ -3,13 +3,15 @@ const Book = require('../models/book');
 const BookOrder = require('../models/bookOrder');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
+const Authorities = require('../models/authorities')
+
 
 exports.getAdmin = (req, res, next) => {
     res.render('admin/adminpage');
 };
 
 exports.getAllAccount = (req, res, next) => {
-    Account.find().then(result => {
+    Account.find().populate('authority').then(result => {
         res.render('admin/showAllAccount', {
             accountData: result
         });
@@ -67,10 +69,13 @@ exports.patchUpdateBook = (req, res, next) => {
 }
 exports.getUpdateAccount = (req, res, next) => {
     const id = req.params.Id;
+    let authList;
+    Authorities.find().then((auth)=>{authList = auth})
     Account.findOne({ _id: id }).then(result => {
         const date = new Date(result.birthday).toLocaleDateString('en-CA');
         res.render('admin/accountUpdate', {
             accountData: result,
+            authList:authList,
             date:date
         })
     })
@@ -95,7 +100,11 @@ exports.postUpdateAccount = (req, res, next) => {
     
 }
 exports.getCreateAccount = (req, res, next) => {
-    res.render('admin/accountCreate');
+    Authorities.find().then((auth)=>{
+        res.render('admin/accountCreate',{
+            authList:auth
+        });   
+    })   
 }
 exports.postCreateAccount = (req, res, next) => {
     const saltRounds = 10;
@@ -120,14 +129,20 @@ exports.postCreateAccount = (req, res, next) => {
     });
     account.save()
         .catch(err => {
-            res.render('admin/accountCreate', {
-                error: err
-            })
+            Authorities.find().then((result)=>{
+                res.render('admin/accountCreate', {
+                    error: err,
+                    authList: result
+                })
+            })       
         })
         .then(result => {
-            res.render('admin/accountCreate', {
-                modal: "success"
-            })
+            Authorities.find().then((result)=>{
+                res.render('admin/accountCreate', {
+                    modal: "success",
+                    authList: result
+                })
+            })     
         });
 }
 exports.getDeleteAccount = (req, res, next) => {
@@ -149,3 +164,53 @@ exports.getAllRequest = (req, res, next) => {
 exports.getDashboard = (req, res, next) => {
     res.render('admin/testChart')
 }
+
+exports.getAuth = (req, res, next) => {
+    Authorities.find().then((result)=>{
+        res.render('admin/showAllAuth',{
+            authList:result
+        });
+    })
+};
+
+exports.getCreateAuth = (req, res, next) => {
+    res.render('admin/authorityCreate');
+};
+
+exports.getDeteleAuth = (req, res, next) => {
+    const Id = req.params.Id;
+    Authorities.findByIdAndDelete(Id).then(()=>{
+        res.redirect('/admin/showAllAuth');
+    })
+};
+
+exports.postAddAuth = (req, res, next) => {
+    const data = req.body;
+    const auth = new Authorities(data);
+    console.log(auth)
+    auth.save().then(
+        res.render('admin/authorityCreate',{
+            modal:"success"
+        })
+    )
+};
+exports.getUpdateAuth = (req, res, next) => {
+    const id = req.params.Id;
+    Authorities.findById(id).then(result=>{
+        res.render('admin/authorityUpdate',{Auth:result});
+
+    })
+};
+
+exports.postUpdateAuth = (req, res, next) => {
+    const data = req.body;
+    const id = req.params.Id;
+    Authorities.findByIdAndUpdate({_id:id},data).then(()=>{
+        Authorities.findById(id).then(result=>{
+            res.render('admin/authorityUpdate',{
+                Auth:result,
+                modal:"success"
+            })
+        })
+    })
+};

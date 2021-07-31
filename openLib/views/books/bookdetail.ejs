@@ -39,7 +39,7 @@
                     <p><%=RAC.rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
                     <p><%=RAC.comment%></p>
                     <%if(locals.accountDataNav){%>
-                        <%if(locals.accountDataNav.authority=='admin'){%>
+                        <%if(locals.accountDataNav.authority.authority=='admin'){%>
                     <div style="text-align: end;">
                         <a href="/RAC-Delete/<%=bookData._id%>/<%=RAC._id%>"><i class="fas fa-trash-alt fa-lg"></i></a>
                     </div>

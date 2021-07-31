@@ -45,7 +45,7 @@
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Password</label>
-                <input type="text" class="form-control" name="password">
+                <input type="password" class="form-control" name="password">
               </div>
               <div class="mb-3">
                 <label class="form-label">Firstname</label>
@@ -66,9 +66,9 @@
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Authority</label>
                 <select class="form-control" name="authority">
-                  <option value="customer">customer</option>
-                  <option value="admin">admin</option>
-                  <option value="staff">staff</option>
+                  <%for(auth of locals.authList){%>
+                    <option value="<%=auth._id%>"><%=auth.authority%></option>
+                  <%}%>
                 </select>
               </div>
               <div class="mb-3">

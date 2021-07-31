@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const authorities = require('./authorities');
 
 const Schema = mongoose.Schema;
 
@@ -36,7 +37,8 @@ const accountSchema = new Schema({
         type: Date
     }, 
     authority :{
-        type:String,
+        type:Schema.Types.ObjectId,
+        ref:authorities,
         require:true
     },
     enabled:{

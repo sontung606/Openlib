@@ -161,10 +161,9 @@ exports.postBookBorrow = (req, res, next) => {
   const numMonth = parseInt(req.body.dateReturn);
   const bookIdInput = req.body.bookId;
   const dateReturnInput = new Date(dateBorrowInput + numMonth);
-
-  if (numMonth == 0 && req.session.accountData.authority == "Lecturers") {
+  if (numMonth == 0 && req.session.accountData.authority.authority == "lecturers") {
     BookBorrow.find({ accountId: req.session.accountData._id }).then(result => {
-      if (result.length >= 5) {
+      if (result.length >=  req.session.accountData.authority.numberBook) {
         Book.findById(bookIdInput).then((result) => {
           let sao = 0;
           for (ratingTotal of result.RAC) {
@@ -221,7 +220,7 @@ exports.postBookBorrow = (req, res, next) => {
   }
   else {
     BookBorrow.find({ accountId: req.session.accountData._id }).then(result => {
-      if (result.length >= 3) {
+      if (result.length >= req.session.accountData.authority.numberBook) {
         Book.findById(bookIdInput).then((result) => {
           let sao = 0;
           for (ratingTotal of result.RAC) {
