@@ -44,7 +44,11 @@
                                             <td><%= book.bookId.author %></td>
                                             <td><%= moment(book.dateBorrow).format('ddd ,DD/MM/YYYY')%></td>
                                             <td><%= moment(book.dateReturn).format('ddd ,DD/MM/YYYY')%></td>
+                                            <%if(book.status==true){%>
                                             <td style="color: #50CB93;">Ongoing</td>
+                                            <%}else{%>
+                                                <td style="color: #e1b12c;">Waiting for retrieve</td>
+                                            <%}%>
                                             <td>
                                                 <a type="button" class="btn btn-info" href="/book-details/<%=book.bookId._id%>">
                                                     Rating 

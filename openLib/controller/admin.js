@@ -187,7 +187,6 @@ exports.getDeteleAuth = (req, res, next) => {
 exports.postAddAuth = (req, res, next) => {
     const data = req.body;
     const auth = new Authorities(data);
-    console.log(auth)
     auth.save().then(
         res.render('admin/authorityCreate',{
             modal:"success"

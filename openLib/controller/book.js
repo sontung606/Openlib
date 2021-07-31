@@ -161,7 +161,7 @@ exports.postBookBorrow = (req, res, next) => {
   const numMonth = parseInt(req.body.dateReturn);
   const bookIdInput = req.body.bookId;
   const dateReturnInput = new Date(dateBorrowInput + numMonth);
-  if (numMonth == 0 && req.session.accountData.authority.authority == "lecturers") {
+  let BookBorrowNew;
     BookBorrow.find({ accountId: req.session.accountData._id }).then(result => {
       if (result.length >=  req.session.accountData.authority.numberBook) {
         Book.findById(bookIdInput).then((result) => {
@@ -174,16 +174,26 @@ exports.postBookBorrow = (req, res, next) => {
             bookData: result,
             rating:rating,
             moment: moment,
-            error: "You've reached your limit, you can no longer borrow more than 5 books."
+            error: "You've reached your limit, you can no longer borrow more than "+req.session.accountData.authority.numberBook+" books."
           })
         })  
       }
       else {
-        const BookBorrowNew = new BookBorrow({
-          dateBorrow: dateBorrowInput,
-          accountId:  req.session.accountData,
-          bookId: bookIdInput
-        });
+        if (numMonth == 0 && req.session.accountData.authority.authority == "lecturers") {
+          BookBorrowNew = new BookBorrow({
+            dateBorrow: dateBorrowInput,
+            accountId:  req.session.accountData,
+            bookId: bookIdInput
+          });
+        }
+        else{
+          BookBorrowNew = new BookBorrow({
+            dateBorrow: dateBorrowInput,
+            dateReturn: dateReturnInput,
+            accountId:  req.session.accountData,
+            bookId: bookIdInput
+          });
+        }
         BookBorrowNew.save()
           .then(() => {
             Book.findById(bookIdInput).then((result) => {
@@ -214,67 +224,8 @@ exports.postBookBorrow = (req, res, next) => {
                 error: "Error please input correct information !!!"
               })
             })
-          })
+       })
       }
     })
-  }
-  else {
-    BookBorrow.find({ accountId: req.session.accountData._id }).then(result => {
-      if (result.length >= req.session.accountData.authority.numberBook) {
-        Book.findById(bookIdInput).then((result) => {
-          let sao = 0;
-          for (ratingTotal of result.RAC) {
-            sao = sao + ratingTotal.rating;
-          }
-          const rating = (sao / result.RAC.length).toFixed(1);
-          res.render('books/bookBorrow', {
-            bookData: result,
-            rating:rating,
-            moment: moment,
-            error: "You've reached your limit, you can no longer borrow more than 3 books."
-          })
-        })  
-      }
-      else {
-        const BookBorrowNew = new BookBorrow({
-          dateBorrow: dateBorrowInput,
-          dateReturn: dateReturnInput,
-          accountId:  req.session.accountData,
-          bookId: bookIdInput
-        });
-        BookBorrowNew.save()
-          .then(() => {
-            Book.findById(bookIdInput).then((result) => {
-              let sao = 0;
-          for (ratingTotal of result.RAC) {
-            sao = sao + ratingTotal.rating;
-          }
-          const rating = (sao / result.RAC.length).toFixed(1);
-              res.render('books/bookBorrow', {
-                bookData: result,
-                rating:rating,
-                moment: moment,
-                success: "Borrow book sucessful"
-              })
-            })
-          })
-          .catch((err) => {
-            Book.findById(bookIdInput).then((result) => {
-              let sao = 0;
-              for (ratingTotal of result.RAC) {
-                sao = sao + ratingTotal.rating;
-              }
-              const rating = (sao / result.RAC.length).toFixed(1);
-              res.render('books/bookBorrow', {
-                bookData: result,
-                rating:rating,
-                moment: moment,
-                error: "Error please input correct information !!!"
-              })
-            })
-          })
-      }
-    })
-  }
 }
 

@@ -20,7 +20,6 @@ exports.postUpdateCustomerInfo = (req, res, next) => {
     const id = req.params.id;
     const data = req.body;
     if(req.body.crtpassword === "" && req.body.newpassword ===""){
-        console.log("yes")
         Account.findByIdAndUpdate({ _id: id }, data).then((account) => {
             res.redirect('/logout');
         })
@@ -71,14 +70,13 @@ exports.postUpdateCustomerInfo = (req, res, next) => {
 
 exports.getBookBorrow = (req, res, next) => {
     const userId = req.session.accountData._id;
-    BookBorrow.find({ accountId: userId, status: true })
+    BookBorrow.find({ accountId: userId})
         .populate('bookId').then(result => {
             res.render('customer/customerBorrowed', {
                 data: result,
                 moment: moment,
                 success: ''
             })
-            console.log(result)
         })
 }
 
