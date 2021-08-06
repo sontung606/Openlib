@@ -46,11 +46,30 @@
                                     <td><%=moment(book.dateReturn).format('DD/MM/YYYY')%></td>
                                     <td><%=book.accountId.email%></td>
                                     <%if(book.status==true){%>
-                                        <td>Ongoing</td>
+                                        <%if(book.dateReturn< Date){%>
+                                        <td class="text-danger">Book is overdue</td>
+                                        <td><a href="/staff-confirmReturn/<%=book._id%>"><i class="fas fa-check"></i></a></td>
+                                        <%}else{%>
+                                        <td class="text-success">Ongoing</td>
                                         <td></td>
+                                        <%}%>
                                     <%}else{%>
-                                        <td>Not received</td>
-                                        <td><a href="/staff-confirmBorrow/<%=book._id%>"><i class="fas fa-check"></i></a></td>
+                                        <%if(book.dateReturn< Date){%>
+                                          <td >Returned</td>
+                                          <td></td>
+                                        <%}else{%>
+                                          <td>Not received</td>
+                                        <td>
+                                          <div class="row">
+                                            <div class="col">
+                                              <a href="/staff-confirmBorrow/<%=book._id%>"><i class="fas fa-check"></i></a>          
+                                            </div>
+                                            <div class="col text-danger">
+                                              <a href="/staff-cancelBorrow/<%=book._id%>"><i class="fas fa-times"></i></a>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <%}%>    
                                     <%}%>
                                   </tr>
                                   <%}%>
