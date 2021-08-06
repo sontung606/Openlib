@@ -19,36 +19,36 @@ exports.getCustomer = (req, res, next) => {
 exports.postUpdateCustomerInfo = (req, res, next) => {
     const id = req.params.id;
     const data = req.body;
-    if(req.body.crtpassword === "" && req.body.newpassword ===""){
+    if (req.body.crtpassword === "" && req.body.newpassword === "") {
         Account.findByIdAndUpdate({ _id: id }, data).then((account) => {
             res.redirect('/logout');
         })
     }
-    else{
-        if(bcrypt.compareSync(req.body.crtpassword, req.session.accountData.password)){
+    else {
+        if (bcrypt.compareSync(req.body.crtpassword, req.session.accountData.password)) {
             const saltRounds = 10;
             const hashPass = bcrypt.hashSync(req.body.newpassword, saltRounds);
-            Account.findByIdAndUpdate({ _id: id },{
-                firstname : data.firstname,
-                lastname : data.lastname,
-                phoneNum : data.phoneNum,
-                birthday : data.birthday,
-                password : hashPass
+            Account.findByIdAndUpdate({ _id: id }, {
+                firstname: data.firstname,
+                lastname: data.lastname,
+                phoneNum: data.phoneNum,
+                birthday: data.birthday,
+                password: hashPass
             }).then((account) => {
                 res.redirect('/logout');
             })
         }
-        else{
+        else {
             const accountUser = req.session.accountData;
             const date = new Date(accountUser.birthday).toLocaleDateString('en-CA');
             res.render('customer/customerPage', {
                 accountUser: accountUser,
                 date: date,
-                err:"Wrong password"
+                err: "Wrong password"
             });
         }
     }
-    
+
 }
 
 // exports.postUpdateCustomerPassword = (req, res, next) => {
@@ -70,7 +70,7 @@ exports.postUpdateCustomerInfo = (req, res, next) => {
 
 exports.getBookBorrow = (req, res, next) => {
     const userId = req.session.accountData._id;
-    BookBorrow.find({ accountId: userId})
+    BookBorrow.find({ accountId: userId })
         .populate('bookId').then(result => {
             res.render('customer/customerBorrowed', {
                 data: result,

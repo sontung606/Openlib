@@ -44,7 +44,7 @@
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Authority</label>
                 <select class="form-control" name="authority">
-                  <%for(auth of locals.authList){%>
+                  <%for(auth of authList){%>
                     <option value="<%=auth._id%>"><%=auth.authority%></option>
                   <%}%>
                 </select>

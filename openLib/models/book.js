@@ -3,38 +3,38 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
-    title:{
+    title: {
         type: String,
-    required: true,
-        trim:true
+        required: true,
+        trim: true
     },
-    author:{
+    author: {
         type: String,
-    required: true,
-    trim:true
+        required: true,
+        trim: true
     },
-    RAC:[{
-        accountId:{
+    RAC: [{
+        accountId: {
             type: Schema.Types.ObjectId,
             ref: 'account'
         },
-        rating:{
-            type:Number
+        rating: {
+            type: Number
         },
-        comment:{
-            type:String
+        comment: {
+            type: String
         }
     }],
-    categories:{
-        type:String,
+    categories: {
+        type: String,
         required: true,
     },
     description: {
         type: String,
         required: true,
-        trim:true
-      },
-    published_date:{
+        trim: true
+    },
+    published_date: {
         type: Date,
         require: true
     },

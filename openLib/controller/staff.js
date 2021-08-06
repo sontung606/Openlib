@@ -17,49 +17,49 @@ exports.getStaffPage = (req, res, next) => {
 exports.getBookBorrows = (req, res, next) => {
     const date = new Date();
     BookBorrow.find()
-    .populate('accountId')
-    .populate('bookId')
-    .then(result=>{
-        res.render('staff/staffListBookBorrow', {
-            BookBorrow: result,
-            moment:moment,
-            Date:date
-        });
-    })
-  
+        .populate('accountId')
+        .populate('bookId')
+        .then(result => {
+            res.render('staff/staffListBookBorrow', {
+                BookBorrow: result,
+                moment: moment,
+                Date: date
+            });
+        })
+
 }
 exports.getConfirmBorrows = (req, res, next) => {
     const Id = req.params.Id;
-    BookBorrow.findOneAndUpdate({_id:Id},{
-        status:true
+    BookBorrow.findOneAndUpdate({ _id: Id }, {
+        status: true
     })
-    .then(result=>{
-        res.redirect('/staff-bookBorrow');
-    })
-    .catch(err=>{
-        console.log(err);
-    })
+        .then(result => {
+            res.redirect('/staff-bookBorrow');
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }
 
 exports.getConfirmReturn = (req, res, next) => {
     const Id = req.params.Id;
-    BookBorrow.findOneAndUpdate({_id:Id},{
-        status:false
+    BookBorrow.findOneAndUpdate({ _id: Id }, {
+        status: false
     })
-    .then(result=>{
-        res.redirect('/staff-bookBorrow');
-    })
-    .catch(err=>{
-        console.log(err);
-    })
+        .then(result => {
+            res.redirect('/staff-bookBorrow');
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }
 exports.getCancelBorrow = (req, res, next) => {
     const Id = req.params.Id;
-    BookBorrow.findByIdAndDelete({_id:Id})
-    .then(result=>{
-        res.redirect('/staff-bookBorrow');
-    })
-    .catch(err=>{
-        console.log(err);
-    })
+    BookBorrow.findByIdAndDelete({ _id: Id })
+        .then(result => {
+            res.redirect('/staff-bookBorrow');
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }

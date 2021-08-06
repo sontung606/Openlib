@@ -17,16 +17,16 @@ exports.postLogin = (req, res, next) => {
         })
       }
       if (bcrypt.compareSync(passInput, result.password)) {
-        if(result.banned > date){
+        if (result.banned > date) {
           return res.render('index/login', {
             error: "Your account is locked please contact to admin for more information."
           })
         }
-        else{
+        else {
           req.session.isLoggedIn = true;
           req.session.accountData = result;
           res.redirect('/');
-        }     
+        }
       }
       else {
         res.render('index/login', {
@@ -61,7 +61,7 @@ exports.postSignUp = (req, res, next) => {
   const phoneInput = req.body.phoneNum;
   const enabledInput = req.body.enabled;
   const hashPass = bcrypt.hashSync(passInput, saltRounds);
-  Authorities.findOne({authority:"customer"}).then((result)=>{
+  Authorities.findOne({ authority: "customer" }).then((result) => {
     const account = new Account({
       email: emailInput,
       password: hashPass,
@@ -78,18 +78,17 @@ exports.postSignUp = (req, res, next) => {
       })
     })
   })
-  .catch((err) => {
-    if (err.name === 'MongoError' && err.code === 11000) {
-      res.render('index/signUp', {
-        error: 'Email is already registered'
-      })
-    }
-    let errorCustom = String(err.message).split(":");
-    console.log(err);
+    .catch((err) => {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        res.render('index/signUp', {
+          error: 'Email is already registered'
+        })
+      }
+      let errorCustom = String(err.message).split(":");
+      console.log(err);
       res.render('index/signUp', {
         error: errorCustom[2]
       })
     })
-
 }
 
