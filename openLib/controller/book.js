@@ -170,9 +170,10 @@ exports.postBookBorrow = (req, res, next) => {
   const dateBorrowInput = Date.parse(req.body.dateBorrow);
   const numMonth = parseInt(req.body.dateReturn);
   const bookIdInput = req.body.bookId;
+  const currentDate = new Date();
   const dateReturnInput = new Date(dateBorrowInput + numMonth);
   let BookBorrowNew;
-  BookBorrow.find({ accountId: req.session.accountData._id }).then(result => {
+  BookBorrow.find({ accountId: req.session.accountData._id ,dateReturn: {$gt:currentDate}}).then(result => {
     if (result.length >= req.session.accountData.authority.numberBook) {
       Book.findById(bookIdInput).then((result) => {
         let sao = 0;

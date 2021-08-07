@@ -17,9 +17,9 @@ exports.postLogin = (req, res, next) => {
         })
       }
       if (bcrypt.compareSync(passInput, result.password)) {
-        if (result.banned > date) {
+        if (result.banned > date || result.enabled==false) {
           return res.render('index/login', {
-            error: "Your account is locked please contact to admin for more information."
+            error: "Your account is disabled please contact to admin for more information."
           })
         }
         else {

@@ -53,6 +53,20 @@ exports.getConfirmReturn = (req, res, next) => {
             console.log(err);
         })
 }
+exports.getConfirmReturnSoon = (req, res, next) => {
+    const Id = req.params.Id;
+    const date = new Date();
+    BookBorrow.findOneAndUpdate({ _id: Id}, {
+        status: false,
+        dateReturn:date 
+    })
+        .then(result => {
+            res.redirect('/staff-bookBorrow');
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
 exports.getCancelBorrow = (req, res, next) => {
     const Id = req.params.Id;
     BookBorrow.findByIdAndDelete({ _id: Id })

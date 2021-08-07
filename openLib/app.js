@@ -46,6 +46,7 @@ app.use(admin);
 app.use(customer);
 app.use(staff);
 
+mongoose.set('useFindAndModify', false);
 mongoose
   .connect(
     'mongodb+srv://tung:tung@cluster0.n5p01.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true}
@@ -55,7 +56,7 @@ mongoose
       BookBorrow.find()
       .then(result=>{
         for(books of result){
-          if(Date.parse(books.dateReturn)< Date.now()){
+          if(Date.parse(books.dateReturn)< Date.now() && books.status == true){
             let dateBanned = new Date(Date.now()+(Date.now()-Date.parse(books.dateReturn)));
             Account.findOneAndUpdate({_id:books.accountId},{banned:dateBanned}).then(result=>{
               console.log("banned "+ result.email )
@@ -67,6 +68,7 @@ mongoose
         console.log(err)
       })
       },86400000);
+      //86400000
     app.listen(3000);
   })
   .catch(err => {
