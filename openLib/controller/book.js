@@ -113,6 +113,9 @@ exports.getbook = (req, res, next) => {
         moment: moment
       })
     })
+    .catch(err=>{
+      res.render('404')
+    })
 }
 exports.getRACDelete = async (req, res, next) => {
   const RACId = req.params.bookRACID;
