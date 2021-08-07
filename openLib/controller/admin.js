@@ -69,7 +69,7 @@ exports.patchUpdateBook = (req, res, next) => {
 }
 exports.getUpdateAccount = async (req, res, next) => {
     const id = req.params.Id;
-    let authList = await Authorities.find();
+    let authList = await Authorities.find()
     Account.findOne({ _id: id }).then(result => {
         const date = new Date(result.birthday).toLocaleDateString('en-CA');
         res.render('admin/accountUpdate', {

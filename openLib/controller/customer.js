@@ -70,12 +70,14 @@ exports.postUpdateCustomerInfo = (req, res, next) => {
 
 exports.getBookBorrow = (req, res, next) => {
     const userId = req.session.accountData._id;
+    const date = new Date()
     BookBorrow.find({ accountId: userId })
         .populate('bookId').then(result => {
             res.render('customer/customerBorrowed', {
                 data: result,
                 moment: moment,
-                success: ''
+                success: '',
+                date:date
             })
         })
 }

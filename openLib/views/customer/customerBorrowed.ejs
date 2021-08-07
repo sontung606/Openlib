@@ -9,8 +9,12 @@
             moment().format();
         </script>
 </head>
-
 <body>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
     <%-include('../template/navbar')%>
         <div class="container-fluid">
             <div class="row" style="background-color: whitesmoke;">
@@ -24,7 +28,7 @@
                                     <strong>Message</strong>: <%= success %>
                                   </div>
                                 <% } %>
-                            <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped"  id="myTable">
                                 <thead>
                                     <tr>
                                         <th>Book Image</th>
@@ -45,9 +49,17 @@
                                             <td><%= moment(book.dateBorrow).format('ddd ,DD/MM/YYYY')%></td>
                                             <td><%= moment(book.dateReturn).format('ddd ,DD/MM/YYYY')%></td>
                                             <%if(book.status==true){%>
-                                            <td style="color: #50CB93;">Ongoing</td>
+                                                <%if(book.dateReturn < date){%>
+                                                <td class="text-danger">Book is overdue</td>
+                                                <%}else{%>
+                                                    <td style="color: #50CB93;">Ongoing</td>
+                                                <%}%>
                                             <%}else{%>
-                                                <td style="color: #e1b12c;">Waiting for retrieve</td>
+                                                <%if(book.dateReturn < date){%>
+                                                    <td >Returned</td>
+                                                  <%}else{%>
+                                                    <td>Not received</td>
+                                                  <%}%>    
                                             <%}%>
                                             <td>
                                                 <a type="button" class="btn btn-info" href="/book-details/<%=book.bookId._id%>">
@@ -65,5 +77,4 @@
         </div>
         <%-include('../template/footer')%>
 </body>
-
 </html>
