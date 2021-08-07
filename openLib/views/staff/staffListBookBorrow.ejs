@@ -43,7 +43,11 @@
                                     <th scope="row"><%=book._id%></th>
                                     <td><%=book.bookId.title%></td>
                                     <td><%=moment(book.dateBorrow).format('DD/MM/YYYY')%></td>
-                                    <td><%=book.dateReturn%></td>
+                                    <%if(book.dateReturn){%>
+                                    <td><%=moment(book.dateReturn).format('DD/MM/YYYY')%></td>
+                                    <%}else{%>
+                                      <td>No return date</td>
+                                    <%}%>
                                     <td><%=book.accountId.email%></td>
                                     <%if(book.status==true){%>
                                         <%if(book.dateReturn< Date){%>
