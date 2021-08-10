@@ -14,6 +14,7 @@ const bodyParser = require('body-parser');
 const BookBorrow = require('./models/booksBorrow');
 const Account = require('./models/account');
 const multer = require('multer');
+const CronJob = require('node-cron')
 
 const fileStorage = multer.diskStorage({
   destination:(req, file, cb)=>{
@@ -45,6 +46,9 @@ app.use(book);
 app.use(admin);
 app.use(customer);
 app.use(staff);
+app.use('/',(req,res)=>{
+  res.render('404')
+})
 
 mongoose.set('useFindAndModify', false);
 mongoose
@@ -52,7 +56,9 @@ mongoose
     'mongodb+srv://tung:tung@cluster0.n5p01.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true}
   ) 
   .then(result => {
-    setInterval(function(){
+        //00 00 12 * * 0-6
+        //*/01 * * * * * 
+      CronJob.schedule('00 00 12 * * 0-6', function() {
       BookBorrow.find()
       .then(result=>{
         for(books of result){
@@ -67,8 +73,7 @@ mongoose
       .catch(err=>{
         console.log(err)
       })
-      },86400000);
-      //86400000
+        });
     app.listen(3000);
   })
   .catch(err => {
