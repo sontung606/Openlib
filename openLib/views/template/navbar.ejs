@@ -17,7 +17,7 @@
           <% if(locals.accountDataNav){%>
             <%if(locals.accountDataNav.authority.authority==="admin" ){ %>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/admin">Welcome! <%= accountDataNav.firstname %>
+                <a class="nav-link active" aria-current="page" href="/admin">Welcome! <%= accountDataNav.lastname %>
                 </a>
               </li>
               <li class="nav-item">
@@ -25,7 +25,7 @@
               </li>
               <%}else if(locals.accountDataNav.authority.authority==="staff" ){%>
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/staff">Welcome! <%= accountDataNav.firstname %>
+                  <a class="nav-link active" aria-current="page" href="/staff">Welcome! <%= accountDataNav.lastname %>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -34,7 +34,7 @@
                 <%}else{%>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/customer">Welcome! <%=
-                        accountDataNav.firstname %></a>
+                        accountDataNav.lastname %> </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
