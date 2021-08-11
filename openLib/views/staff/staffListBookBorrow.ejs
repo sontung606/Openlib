@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../template/head')%>
+        <title>List borrow books</title>
+</head>
+
+<body>
+  <script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+    <%-include('../template/navbar')%>
+        <div class="container-fluid">
+            <div class="row" style="background-color: whitesmoke;">
+                <%-include('../template/navbarStaff')%>
+                    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Dashboard</h1>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                             
+                            </div>
+                          </div>
+                          <h2>List Book Borrows</h2>
+                          <div>
+                            <table class="table" id="myTable">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Book name</th>
+                                    <th scope="col">Date borrow</th>
+                                    <th scope="col">Date return</th>
+                                    <th scope="col">Account email</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <%for(book of BookBorrow){%>
+                                  <tr>
+                                    <th scope="row"><%=book._id%></th>
+                                    <td><%=book.bookId.title%></td>
+                                    <td><%=moment(book.dateBorrow).format('DD/MM/YYYY')%></td>
+                                    <%if(book.dateReturn){%>
+                                    <td><%=moment(book.dateReturn).format('DD/MM/YYYY')%></td>
+                                    <%}else{%>
+                                      <td>No return date</td>
+                                    <%}%>
+                                    <td><%=book.accountId.email%></td>
+                                    <%if(book.status==true){%>
+                                        <%if(book.dateReturn< Date){%>
+                                        <td class="text-danger">Book is overdue</td>
+                                        <td><a href="/staff-confirmReturn/<%=book._id%>"><i class="fas fa-check"></i></a></td>
+                                        <%}else{%>
+                                        <td class="text-success">Ongoing</td>
+                                        <td><a href="/staff-confirmReturnSoon/<%=book._id%>"><i class="fas fa-check"></i></a></td>
+                                        <%}%>
+                                    <%}else{%>
+                                        <%if(book.dateReturn< Date){%>
+                                          <td >Returned</td>
+                                          <td></td>
+                                        <%}else{%>
+                                          <td>Not received</td>
+                                          <td>
+                                            <div class="row">
+                                              <div class="col">
+                                                <a href="/staff-confirmBorrow/<%=book._id%>"><i class="fas fa-check"></i></a>          
+                                              </div>
+                                              <div class="col text-danger">
+                                                <a href="/staff-cancelBorrow/<%=book._id%>"><i class="fas fa-times"></i></a>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        <%}%>    
+                                    <%}%>
+                                  </tr>
+                                  <%}%>
+                                </tbody>
+                            </table>
+                          </div>
+                    </div>
+            </div>
+        </div>
+        <%-include('../template/footer')%>
+</body>
+</html>

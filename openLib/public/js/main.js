@@ -7,13 +7,12 @@ function onCustomerToggle() {
     }
 }
 
-
 function validate() {
 
     var a = document.getElementById("newpassword").value;
     var b = document.getElementById("confirm_password").value;
     if (a != b) {
-        alert("Passwords do no match");
+        alert("Passwords not match");
         return false;
     }
 }

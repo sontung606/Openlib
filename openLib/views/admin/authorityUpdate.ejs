@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%-include('../template/head')%>
+    <title>Authority update</title>
+</head>
+
+<body onload="openModal()">
+  <% if(locals.modal=='success') {  %>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update authority</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Update successful
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>   
+<%} %>
+  <%-include('../template/navbar')%>
+    <div class="container-fluid mb-3">
+      <div class="row">
+        <%-include('../template/navbarAdmin')%>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+              <h1 class="h2">Authority update</h1>
+            </div>
+            <form method="POST" action="/admin/update-auth/<%=Auth._id%>">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Authority</label>
+                <input type="text" class="form-control" name="authority" value="<%=Auth.authority%>">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Number book borrow limit</label>
+                <input type="number" class="form-control" name="numberBook" value="<%=Auth.numberBook%>">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </main>
+      </div>
+    </div>
+    <%-include('../template/footer')%>
+</body>
+<script>
+  function openModal() {
+ $(document).ready(function () {
+          $("#myModal").modal('show');
+      });
+  }
+ </script>
+</html>

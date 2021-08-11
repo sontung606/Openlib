@@ -3,9 +3,8 @@
 
 <head>
   <%-include('../template/head')%>
-    <title>account update</title>
+    <title>Update account</title>
 </head>
-
 <body>
   <%-include('../template/navbar')%>
     <div class="container-fluid mb-3">
@@ -22,11 +21,6 @@
                 <input type="text" class="form-control" name="email" value="<%=accountData.email%>">
               </div>
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" value="<%=accountData.password%>">
-
-              </div>
-              <div class="mb-3">
                 <label class="form-label">Firstname</label>
                 <input type="text" class="form-control" name="firstname"  value="<%=accountData.firstname%>">
               </div>
@@ -41,14 +35,18 @@
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Phone number</label>
                 <input type="tel" pattern="[0-9]*" class="form-control" name="phoneNum" value="<%=accountData.phoneNum%>">
-
+              </div>
+              <input type="checkbox" class="mb-3" onclick="newPass(this)"> New password</input>
+              <div class="mb-3" id="passInput" style="display: none;">
+                <label for="exampleInputEmail1" class="form-label">Password</label>
+                <input type="password"  class="form-control" name="password" >
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Authority</label>
                 <select class="form-control" name="authority">
-                    <option value="customer">customer</option>
-                    <option value="admin">admin</option>
-                    <option value="staff">staff</option>
+                  <%for(auth of authList){%>
+                    <option value="<%=auth._id%>"><%=auth.authority%></option>
+                  <%}%>
                 </select>
               </div>
               <div class="mb-3">
@@ -65,4 +63,14 @@
     </div>
     <%-include('../template/footer')%>
 </body>
+<script>
+  function newPass(checkbox){
+    if(checkbox.checked == true){
+      document.getElementById("passInput").style.display="block";
+    }
+    else{
+      document.getElementById("passInput").style.display="none";
+    }
+  }
+</script>
 </html>

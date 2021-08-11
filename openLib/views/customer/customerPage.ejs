@@ -3,10 +3,11 @@
 
 <head>
     <%-include('../template/head')%>
-        <title>Document</title>
+        <title>Customer</title>
         <style>
-            .formCustom{
-                display:flex; flex-direction: row;
+            .formCustom {
+                display: flex;
+                flex-direction: row;
             }
         </style>
 </head>
@@ -16,44 +17,50 @@
         <div class="container-fluid">
             <div class="row" style="background-color: whitesmoke;">
                 <%-include('../template/navbarCustomer')%>
-                <div class="col-md-10 p-5">
-                    <h4>User information</h4>
-                    <div class="p-3" style="background-color: white;">
-                        <div class="row">
-                            <form onSubmit="return validate();" >
-                                <div class="form-group d-flex">
-                                    <div class="col-lg-2">
-                                        <label for="first">Firstname:</label>
+                    <div class="col-md-10 p-5">
+                        <h4>User information</h4>
+                        <div class="p-3" style="background-color: white;">
+                            <div class="row">
+                                <form onsubmit="return validate()" action="/customer/update/<%=accountUser._id%>" method="POST" novalidate>
+                                    <%if(locals.err){%>
+                                        <p class="text-danger"><%=err%></p>
+                                    <%}%>
+                                    <div class="form-group d-flex">
+                                        <div class="col-lg-2">
+                                            <label for="firstname">Firstname:</label>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <input name="firstname" class="form-control"
+                                                value="<%=accountUser.firstname%>" />
+                                        </div>
                                     </div>
-                                    <div class="col-lg-5">
-                                        <input name="first" class="form-control" value="<%=accountUser.firstname%>"/>
+                                    <div class="form-group d-flex mt-3">
+                                        <div class="col-lg-2">
+                                            <label for="lastname">Last name:</label>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <input name="lastname" class="form-control"
+                                                value="<%=accountUser.lastname%>" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group d-flex mt-3">
-                                    <div class="col-lg-2">
-                                        <label for="last">Last name:</label>
+                                    <div class="form-group d-flex mt-3">
+                                        <div class="col-lg-2">
+                                            <label for="phoneNum">Phone number:</label>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <input name="phoneNum" class="form-control"
+                                                value="<%=accountUser.phoneNum%>" />
+                                        </div>
                                     </div>
-                                    <div class="col-lg-5">
-                                        <input name="last" class="form-control" value="<%=accountUser.lastname%>"/>
+                                    <div class="form-group d-flex mt-3">
+                                        <div class="col-lg-2">
+                                            <label for="email">Email:</label>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <input name="email" class="form-control" value="<%=accountUser.email%>" disabled/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group d-flex mt-3">
-                                    <div class="col-lg-2">
-                                        <label for="phone">Phone number:</label>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <input name="phone" class="form-control" value="<%=accountUser.phoneNum%>" />
-                                    </div>
-                                </div>
-                                <div class="form-group d-flex mt-3">
-                                    <div class="col-lg-2">
-                                        <label for="email">Email:</label>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <input name="email" class="form-control"  value="<%=accountUser.email%>"/>
-                                    </div>
-                                </div>
-                                <!-- <div class="form-group d-flex mt-3">
+                                    <!-- <div class="form-group d-flex mt-3">
                                     <div class="col-lg-2">
                                         <label for="gender">Giới tính:</label>
                                     </div>
@@ -68,62 +75,62 @@
                                             </label>                             
                                     </div>
                                 </div> -->
-                                <div class="form-group d-flex mt-3">
-                                    <div class="col-lg-2">
-                                        <label for="date">Date born:</label>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <input name="date" class="form-control" type="date" value="<%=date%>"/>
-                                    </div>
-                                </div>
-                                <div class="form-group d-flex mt-3">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-5">
-                                        <input name="check" type="checkbox" onclick="onCustomerToggle()"/>
-                                        <span class="label"> Change password</span>
-                                    </div>
-                                </div>
-                                <div class="row" id="passwordChanger" style="display: none;">
                                     <div class="form-group d-flex mt-3">
                                         <div class="col-lg-2">
-                                            <label for="date">Old password:</label>
+                                            <label for="birthday">Date born:</label>
                                         </div>
                                         <div class="col-lg-5">
-                                            <input name="date" class="form-control"
-                                                type="password" placeholder="Enter old password"/>
+                                            <input name="birthday" class="form-control" type="date" value="<%=date%>" />
                                         </div>
                                     </div>
                                     <div class="form-group d-flex mt-3">
-                                        <div class="col-lg-2">
-                                            <label for="date">New password:</label>
-                                        </div>
+                                        <div class="col-lg-2"></div>
                                         <div class="col-lg-5">
-                                            <input name="date" class="form-control" 
-                                                type="password" id="newpassword"
-                                                placeholder="Enter New password" required/>
+                                            <input name="check" type="checkbox" onclick="onCustomerToggle()" />
+                                            <span class="label"> Change password</span>
                                         </div>
                                     </div>
-                                    <div class="form-group d-flex mt-3">
-                                        <div class="col-lg-2">
-                                            <label for="date">Confirm password:</label>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <input name="date" class="form-control" 
-                                                type="password" id="confirm_password"
-                                                placeholder="Confirm New password" required/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group d-flex mt-3" style="justify-content: center; align-items: center">
-                                    <button type="submit" class="btn btn-outline-warning" style="color: black;">Update info</button>
-                                </div>
-                                
-                                
-                            </form>
-                        </div>
-                    </div>
 
-                </div>
+                                    <div class="row" id="passwordChanger" style="display: none;">
+                                        <div class="form-group d-flex mt-3">
+                                            <div class="col-lg-2">
+                                                <label for="crtpassword">Old password:</label>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <input name="crtpassword" class="form-control" type="password"
+                                                    placeholder="Enter old password" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex mt-3">
+                                            <div class="col-lg-2">
+                                                <label for="newpassword">New password:</label>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <input name="newpassword" class="form-control" type="password"
+                                                    id="newpassword" placeholder="Enter New password" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex mt-3">
+                                            <div class="col-lg-2">
+                                                <label for="confirm">Confirm password:</label>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <input name="confirm" class="form-control" type="password"
+                                                    id="confirm_password" placeholder="Confirm New password" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex mt-3"
+                                    style="justify-content: center; align-items: center">
+                                    <button type="submit" class="btn btn-outline-warning"
+                                        style="color: black;">Update info</button>
+                                </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
             </div>
         </div>
         <%-include('../template/footer')%>

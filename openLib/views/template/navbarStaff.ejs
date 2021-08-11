@@ -1,0 +1,29 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="d-flex mt-3">
+        <div class="pull-left m-2">
+            <i class="fas fa-house-user fa-2x"></i>
+        </div>
+        <div class="pull-right">
+            Hello staff:
+            <h6><strong><%=locals.accountDataNav.firstname%> <%=locals.accountDataNav.lastname%></strong></h6>
+        </div>
+    </div>
+    <hr>
+    <div class="position-sticky">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link link-dark link-bar" aria-current="page" href="/staff">
+            <span data-feather="home">
+              <i class="fas fa-columns"></i>
+            </span>
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-dark link-bar" href="/staff-bookBorrow">
+            <span data-feather="file"></span>
+            <i class="fas fa-list"></i> List book borrows
+          </a>
+        </li>
+    </div>
+  </nav>

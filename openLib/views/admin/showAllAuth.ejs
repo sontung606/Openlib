@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('../template/head')%>
+        <title>Authority list</title>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+    <%-include('../template/navbar')%>
+        <div class="container-fluid">
+            <div class="row">
+                <%-include('../template/navbarAdmin')%>
+                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                        <div
+                            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                            <h1 class="h2">List authorities</h1>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" href="/admin/create-authority">Add authority</a>
+                        </div>
+                        <br>
+                        <table class="table table-hover table-striped table-light" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Authority</th>
+                                    <th>number book borrow</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(auth of authList) { %>
+                                    <tr>
+                                        <td>
+                                            <%=auth._id %>
+                                        </td>
+                                        <td>
+                                            <%=auth.authority%>
+                                        </td>
+                                        <td>
+                                            <%=auth.numberBook%>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/update-auth/<%=auth._id%>"><i class="fas fa-edit fa-lg"></i></a>
+                                            <a href="/admin/delete-auth/<%=auth._id%>" class="link-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></i></a>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                    </main>
+            </div>
+        </div>
+        <%-include('../template/footer')%>
+</body>
+</html>

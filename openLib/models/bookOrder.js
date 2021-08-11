@@ -3,21 +3,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
-    accountMail:{
+    accountMail: {
         type: String,
         require: true
     },
-    bookName:{
+    bookName: {
         type: String,
-        require:true
+        require: true
     },
-    bookAuthor:{
+    bookAuthor: {
         type: String,
-        require:true
+        require: true
     },
-    orderDate:{
+    orderDate: {
         type: Date,
         require: true
     }
-    });
-    module.exports = mongoose.model('bookOrders', bookSchema);
+});
+module.exports = mongoose.model('bookOrders', bookSchema);

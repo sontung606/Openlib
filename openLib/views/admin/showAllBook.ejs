@@ -3,9 +3,7 @@
 
 <head>
     <%-include('../template/head')%>
-        <title>list books</title>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+        <title>Books list</title>
 </head>
 
 <body>
@@ -31,7 +29,7 @@
                                     <th>Photo Thumbs</th>
                                     <th>Name</th>
                                     <th>Author</th>
-                                    <th>Description</th>
+                                    <th>Categories</th>
                                     <th>Published</th>
                                     <th>Action</th>
                                 </tr>
@@ -39,7 +37,7 @@
                             <tbody>
                                 <%for(book of bookData) { %>
                                     <tr>
-                                        <td><img src="<%=book.imageUrl%>" alt="image"
+                                        <td><img src="/<%=book.imageUrl%>" alt="image"
                                                 style="height: 100px; width: auto;"></td>
                                         <td>
                                             <%=book.title %>
@@ -48,10 +46,10 @@
                                             <%=book.author%>
                                         </td>
                                         <td>
-                                            <%=book.description%>
+                                            <%=book.categories%>
                                         </td>
                                         <td>
-                                            <%=book.published_date%>
+                                            <%=moment(book.published_date).format('DD/MM/YYYY')%>
                                         </td>
                                         <td>
                                             <a href="/admin/update-book/<%=book._id%>"><i class="fas fa-edit fa-lg"></i></a>
