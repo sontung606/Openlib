@@ -160,6 +160,13 @@ exports.getAllRequest = (req, res, next) => {
     })
 }
 
+exports.getConfirmRequest = (req, res, next) => {
+    const id = req.params.Id;
+    BookOrder.findByIdAndDelete(id).then(() => {
+       res.redirect('/admin/all-request')
+    })
+}
+
 exports.getDashboard = (req, res, next) => {
     res.render('admin/testChart')
 }
