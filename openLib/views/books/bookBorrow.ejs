@@ -39,7 +39,7 @@
         </div>
     </div>
     <div>
-        <form method="POST" action="/book-borrow">
+        <form method="POST" onsubmit="return confirm('Are you sure borrow this book ?')" action="/book-borrow">
             <% if(locals.error){%>
                 <p class="text-danger"> <%=error%></p>
                 <%}%>

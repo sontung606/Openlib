@@ -15,4 +15,7 @@ function validate() {
         alert("Passwords not match");
         return false;
     }
+    else{
+        return confirm('Are you sure update information ?');
+    }
 }

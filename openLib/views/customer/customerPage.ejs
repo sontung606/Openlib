@@ -21,7 +21,7 @@
                         <h4>User information</h4>
                         <div class="p-3" style="background-color: white;">
                             <div class="row">
-                                <form onsubmit="return validate()" action="/customer/update/<%=accountUser._id%>" method="POST" novalidate>
+                                <form onsubmit="return validate();" action="/customer/update/<%=accountUser._id%>" method="POST" novalidate>
                                     <%if(locals.err){%>
                                         <p class="text-danger"><%=err%></p>
                                     <%}%>
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="form-group d-flex mt-3"
                                     style="justify-content: center; align-items: center">
-                                    <button type="submit" class="btn btn-outline-warning"
+                                    <button type="submit" class="btn btn-outline-warning" onclick="return confirm('Are you sure?')"
                                         style="color: black;">Update info</button>
                                 </div>
                                 </form>

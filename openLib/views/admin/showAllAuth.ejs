@@ -48,7 +48,7 @@
                                         </td>
                                         <td>
                                             <a href="/admin/update-auth/<%=auth._id%>"><i class="fas fa-edit fa-lg"></i></a>
-                                            <a href="/admin/delete-auth/<%=auth._id%>" class="link-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></i></a>
+                                            <a href="/admin/delete-auth/<%=auth._id%>" onclick="return confirm('Are you sure?')" class="link-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></i></a>
                                         </td>
                                     </tr>
                                     <% } %>
