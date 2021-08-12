@@ -14,7 +14,7 @@
             <div class="col-3 pb-2">
                 <div class="card h-100 ">
                     <a href="/book-details/<%=books._id%>">
-                        <img src="/<%=books.imageUrl%>" class="card-img-top" height="400px" width="100%" alt="...">
+                        <img src="/<%=books.imageUrl%>" class="card-img-top" height="350px" width="100%" alt="...">
                     </a>
                         <div class="card-body">
                              <h5 class=" card-title fw-bold">
@@ -24,11 +24,12 @@
                                 <%=books.author%>
                             </p>
                     </div>
-                    <a href="/book-details/<%=books._id%>" style="background-color: #ffeaa7;">
-                        <div class="card-footer d-flex justify-content-center">
-                            Details
-                        </div>
-                    </a>
+                    <div class="card-footer d-flex"  style="background-color: #ffeaa7;">
+                        <h6><strong><%=books.bookPriceBorrow%> USD</strong></h6>
+                        <a href="/book-details/<%=books._id%>" class="ms-auto">
+                            <strong>Details</strong>
+                        </a>
+                    </div>
                 </div>
             </div>
          <%}%>

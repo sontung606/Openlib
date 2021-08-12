@@ -26,7 +26,6 @@ exports.getBookBorrows = (req, res, next) => {
                 Date: date
             });
         })
-
 }
 exports.getConfirmBorrows = (req, res, next) => {
     const Id = req.params.Id;

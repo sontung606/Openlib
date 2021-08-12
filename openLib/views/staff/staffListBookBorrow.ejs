@@ -34,6 +34,7 @@
                                     <th scope="col">Date return</th>
                                     <th scope="col">Account email</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Deposit</th>
                                     <th scope="col">Action</th>
                                   </tr>
                                 </thead>
@@ -52,17 +53,21 @@
                                     <%if(book.status==true){%>
                                         <%if(book.dateReturn< Date){%>
                                         <td class="text-danger">Book is overdue</td>
+                                        <td class="text-danger">Ban</td>
                                         <td><a href="/staff-confirmReturn/<%=book._id%>"><i class="fas fa-check"></i></a></td>
                                         <%}else{%>
                                         <td class="text-success">Ongoing</td>
+                                        <td class="text-success">Paid</td>
                                         <td><a href="/staff-confirmReturnSoon/<%=book._id%>"><i class="fas fa-check"></i></a></td>
                                         <%}%>
                                     <%}else{%>
                                         <%if(book.dateReturn< Date){%>
                                           <td >Returned</td>
+                                          <td class="text-success">Paid</td>
                                           <td></td>
                                         <%}else{%>
                                           <td>Not received</td>
+                                          <td><%=book.bookId.bookPriceBorrow%> USD</td>
                                           <td>
                                             <div class="row">
                                               <div class="col">

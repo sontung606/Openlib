@@ -36,9 +36,9 @@
            <p><span class="spantext">Author: </span><%= bookData.author%> (author)</p>
                <p><span class="spantext">Rating: </span><%= rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
            <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>
-        </div>
+           <h6>Deposit: <%= bookData.bookPriceBorrow%> USD</h6>
+          </div>
     </div>
-    <div>
         <form method="POST" action="/book-borrow">
             <% if(locals.error){%>
                 <p class="text-danger"> <%=error%></p>
@@ -67,7 +67,6 @@
             <input type="hidden" name="bookId" value="<%=bookData._id%>">
         <button class="btn btn-outline-primary  float-end">Submit</button>
         </form>
-    </div>
 </div>
     <%-include('../template/footer')%>
 </body>

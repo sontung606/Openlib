@@ -18,6 +18,7 @@
                <p><span class="spantext">Rating: </span><%= rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
                <p><span class="spantext">Description: </span><%= bookData.description%></p>
                <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>
+               <h6>Deposit: <%= bookData.bookPriceBorrow%> USD</h6>
             </div>
         </div>
         <div class="row mb-5">
