@@ -4,7 +4,7 @@ const account = require('../models/account');
 var moment = require('moment');
 const { populate } = require('../models/book');
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 8;
 
 exports.getBookSearch = async (req, res, next) => {
   const page = parseInt(req.query.page);

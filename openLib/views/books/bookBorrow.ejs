@@ -36,7 +36,7 @@
            <p><span class="spantext">Author: </span><%= bookData.author%> (author)</p>
                <p><span class="spantext">Rating: </span><%= rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
            <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>
-           <h6>Deposit: <%= bookData.bookPriceBorrow%> USD</h6>
+           <p class="fw-bold"><span class="spantext fw-bold">Deposit: </span><%= bookData.bookPriceBorrow%> $ <i style="color: #27ae60;" class="fas fa-money-bill-wave-alt"></i></p>
           </div>
     </div>
         <form method="POST" action="/book-borrow">
