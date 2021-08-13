@@ -47,12 +47,11 @@ exports.getConfirmReturn = async (req, res, next) => {
     const bookBorrowFind = await BookBorrow.findById(Id).populate('bookId');
     const borrowDate = bookBorrowFind.dateBorrow;
     let rentDay = date.getDate() - borrowDate.getDate();
-    console.log(rentDay);
     const rentTotal = rentDay*((bookBorrowFind.bookId.bookPriceBorrow * 1)/100);
     BookBorrow.findOneAndUpdate({ _id: Id}, {
         status: false,
         dateReturn:date,
-        rentPriceTotal:rentTotal
+        rentPriceTotal:rentTotal.toFixed(2)
     })
     .then(result => {
         res.redirect('/staff-bookBorrow');
