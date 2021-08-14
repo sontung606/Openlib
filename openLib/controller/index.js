@@ -18,7 +18,8 @@ exports.getIndex = async (req, res, next) => {
         foreignField: "_id",
         as:"books"
       }
-    }
+    },
+    { $limit : 8 }
 ]);
   res.render('index/indexBook', {
     bookCategories: bookCategories,
