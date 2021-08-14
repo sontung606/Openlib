@@ -11,6 +11,9 @@ exports.getBookSearch = async (req, res, next) => {
   const search = req.query.search;
   const cate = req.query.cate;
   const url = req.url;
+  const titleArray = await Book.distinct("title")
+  const authorArray = await Book.distinct("author")
+  const autocorrectSeachArray = titleArray.concat(authorArray);
   let numItem;
   if (search == null || cate == null) {
     Book.find()
@@ -18,7 +21,8 @@ exports.getBookSearch = async (req, res, next) => {
         let bookCategories = result;
         res.render('books/bookCategories', {
           bookData: null,
-          bookCategories: bookCategories
+          bookCategories: bookCategories,
+          bookTitleData:autocorrectSeachArray
         })
       });
   }
@@ -55,7 +59,8 @@ exports.getBookSearch = async (req, res, next) => {
             currentPage: page,
             previousPage: page - 1,
             lastPage: Math.ceil(numItem / ITEMS_PER_PAGE),
-            url: url
+            url: url,
+            bookTitleData:autocorrectSeachArray
           })
         });
       })
@@ -91,7 +96,8 @@ exports.getBookSearch = async (req, res, next) => {
             currentPage: page,
             previousPage: page - 1,
             lastPage: Math.ceil(numItem / ITEMS_PER_PAGE),
-            url: url
+            url: url,
+            bookTitleData:autocorrectSeachArray
           })
         });
       })
