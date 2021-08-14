@@ -20,7 +20,7 @@ exports.getIndex = async (req, res, next) => {
       }
     },
     { $limit : 8 }
-]);
+  ]);
   res.render('index/indexBook', {
     bookCategories: bookCategories,
     trendBooks:trendBooks,

@@ -54,6 +54,38 @@
             <%firstPage++;}%> 
         </div>
         <br>
+        <h2 style="text-align: left; color: #6c5ce7; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" >Trending books</h2>
+        <div class="row">
+            <%for(arr of trendBooks){%>
+                <%for(trendbooks of arr.books){%>
+                <div class="col-lg-2 col-md-6 pb-2">
+                    <div class="card h-100 ">
+                        <a href="/book-details/<%=trendbooks._id%>">
+                            <img src="/<%=trendbooks.imageUrl%>" class="card-img-top" height="280px"
+                                width="100%" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <h5 class=" card-title fw-bold">
+                                <%=trendbooks.title%>
+                            </h5>
+                            <p class="card-text author">
+                                <%=trendbooks.author%>
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex" style="background-color: #ffeaa7;">
+                            <h6><strong>
+                                    <%=trendbooks.bookPriceBorrow%> USD
+                                </strong></h6>
+                            <a href="/book-details/<%=trendbooks._id%>" class="ms-auto">
+                                <strong>Details</strong>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <%}%>
+            <%}%>
+        </div>
     </div>
 </body>
 <%-include('../template/footer')%>

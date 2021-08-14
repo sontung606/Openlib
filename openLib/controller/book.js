@@ -11,6 +11,22 @@ exports.getBookSearch = async (req, res, next) => {
   const search = req.query.search;
   const cate = req.query.cate;
   const url = req.url;
+  const trendBooks = await BookBorrow.aggregate([
+    { "$group": { 
+        "_id": '$bookId', 
+        "count": { "$sum": 1 }
+    }},
+    { "$sort": { "count": -1 } },
+    {
+      "$lookup":{
+        from: "books",
+        localField: "_id",
+        foreignField: "_id",
+        as:"books"
+      }
+    },
+    { $limit : 8 }
+  ]);
   const titleArray = await Book.distinct("title")
   const authorArray = await Book.distinct("author")
   const autocorrectSeachArray = titleArray.concat(authorArray);
@@ -21,6 +37,7 @@ exports.getBookSearch = async (req, res, next) => {
         let bookCategories = result;
         res.render('books/bookCategories', {
           bookData: null,
+          trendBooks:trendBooks,
           bookCategories: bookCategories,
           bookTitleData:autocorrectSeachArray
         })
@@ -51,6 +68,7 @@ exports.getBookSearch = async (req, res, next) => {
           res.render('books/bookCategories', {
             bookData: books,
             bookCategories: bookCategories,
+            trendBooks:trendBooks,
             totalBooks: numItem,
             hasNextPage: ITEMS_PER_PAGE * page < numItem,
             hasPreviousPage: page > 1,
@@ -88,6 +106,7 @@ exports.getBookSearch = async (req, res, next) => {
           res.render('books/bookCategories', {
             bookData: books,
             bookCategories: bookCategories,
+            trendBooks:trendBooks,
             totalBooks: numItem,
             hasNextPage: ITEMS_PER_PAGE * page < numItem,
             hasPreviousPage: page > 1,
