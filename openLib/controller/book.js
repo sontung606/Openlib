@@ -3,6 +3,7 @@ const BookBorrow = require('../models/booksBorrow');
 const account = require('../models/account');
 var moment = require('moment');
 const { populate } = require('../models/book');
+const book = require('../models/book');
 
 const ITEMS_PER_PAGE = 8;
 
@@ -122,25 +123,28 @@ exports.getBookSearch = async (req, res, next) => {
       })
   }
 }
-exports.getbook = (req, res, next) => {
+exports.getbook = async (req, res, next) => {
   const bookID = req.params.bookID;
-  Book.findById(bookID)
-    .populate('RAC.accountId')
-    .then(book => {
-      let sao = 0;
-      for (ratingTotal of book.RAC) {
-        sao = sao + ratingTotal.rating;
-      }
-      const rating = (sao / book.RAC.length).toFixed(1);
-      res.render('books/bookdetail', {
-        bookData: book,
-        rating: rating,
-        moment: moment
-      })
+  let sao = 0;
+  try{
+    const bookFind = await Book.findById(bookID).populate('RAC.accountId');
+    const sameCategoryBooks = await Book.find({_id:{$ne:bookFind._id},categories:bookFind.categories})
+    const sameAuthorBook = await Book.find({_id:{$ne:bookFind._id},author:bookFind.author})
+    for (ratingTotal of bookFind.RAC) {
+      sao = sao + ratingTotal.rating;
+    }
+    const rating = (sao / bookFind.RAC.length).toFixed(1);
+    res.render('books/bookdetail', {
+      bookData: bookFind,
+      rating: rating,
+      moment: moment,
+      sameAuthorBook:sameAuthorBook,
+      sameCategoryBooks:sameCategoryBooks
     })
-    .catch(err=>{
-      res.render('404')
-    })
+  }
+  catch (err){
+    res.render('404')
+  }
 }
 exports.getRACDelete = async (req, res, next) => {
   const RACId = req.params.bookRACID;

@@ -4,8 +4,19 @@
 <head>
     <%-include('../template/head')%>
         <title>OpenLib</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
-
+<script>
+    $( function() {
+      var Data = '<%=bookTitleData%>' ;
+      Data = Data.split(',');
+  $( "#myInput" ).autocomplete({
+    source: Data
+  });
+});
+</script>
 <body>
     <%-include('../template/navbar')%>
         <a onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-double-up fa-lg"></i></a>
@@ -17,10 +28,10 @@
                 </div>
                 <div class="p-2 bd-highlight">Shop Online with Bookshop.</div>
                 <div>
-                    <form method="GET" action="/book-search/">
+                    <form method="GET" action="/book-search/" autocomplete="off">
                         <input type="hidden" name="page" value="1">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Book's name, author..."
+                            <input id="myInput" type="text" class="form-control" placeholder="Book's name, author..."
                                 aria-label="Recipient's username" aria-describedby="button-addon2" name="search">
                             <button class="btn btn-secondary" type="submit" id="button-addon2">Search</button>
                             <input type="hidden" name="cate" value="All">
