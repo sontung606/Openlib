@@ -150,16 +150,44 @@ exports.getRACDelete = async (req, res, next) => {
   const RACId = req.params.bookRACID;
   const bookId = req.params.bookID;
   const book = await Book.findById(bookId);
-  for (let i = 0; i < book.RAC.length; i++) {
-    if (book.RAC[i]._id == RACId) {
-      book.RAC.splice(i, 1);
-      break;
+  for (let i = 0; i < book.RAC.length; i++) {  
+    if(req.session.accountData._id==book.RAC[i].accountId ||req.session.accountData.authority.authority=='admin')
+    {
+      if (book.RAC[i]._id == RACId) {
+        book.RAC.splice(i, 1);
+        Book.findByIdAndUpdate({ _id: bookId }, book).then(() => {
+          res.redirect('/book-details/' + bookId);
+        });
+        break;
+      }
     }
   }
-  Book.findByIdAndUpdate({ _id: bookId }, book).then(() => {
-    res.redirect('/book-details/' + bookId);
-  });
 }
+exports.postRACUpdate = async (req, res, next) => {
+  const RACId = req.body.RACId;
+  const bookId = req.body.id;
+  const accountId = req.body.accountId;
+  const ratingInput = req.body.rate;
+  const commentInput = req.body.comment;
+  const RACInput = {
+    _id:RACId,
+    accountId: accountId,
+    rating: ratingInput,
+    comment: commentInput
+  };
+  const book = await Book.findById(bookId);
+  for (let i = 0; i < book.RAC.length; i++) {  
+    if(RACId==book.RAC[i]._id)
+    {
+     book.RAC[i] = RACInput;
+     Book.findByIdAndUpdate({ _id: bookId }, book).then(() => {
+      res.redirect('/book-details/' + bookId);
+    });
+    break;
+    }
+  }
+}
+ 
 exports.postRAC = (req, res, next) => {
   const id = req.body.id;
   const ratingInput = req.body.rate;

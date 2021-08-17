@@ -72,6 +72,59 @@
                                                         class="fas fa-trash-alt fa-lg"></i></a>
                                             </div>
                                             <%}}%>
+
+                                        <%if(locals.accountDataNav){%>
+                                            <%if(locals.accountDataNav._id==RAC.accountId._id){%>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-1">
+                                                        <div style="text-align: end;">
+                                                            <a href="/RAC-Delete/<%=bookData._id%>/<%=RAC._id%>"><i
+                                                                    class="fas fa-trash-alt fa-lg"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <div style="text-align: end;">
+                                                            <a  data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                                <i class="fas fa-edit fa-lg"></i>
+                                                              </a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse pt-1" id="collapseExample">
+                                                    <div class="card card-body">
+                                                        <form method="POST" action="/RAC-update">
+                                                            <input type="hidden" name="RACId" value="<%=RAC._id%>">
+                                                            <input type="hidden" name="accountId" value="<%=locals.accountDataNav._id%>">
+                                                            <input type="hidden" name="id" value="<%=bookData._id%>">
+                                                            <h2>Comment</h2>
+                                                            <textarea class="form-control" type="text" name="comment"></textarea>
+                                                            <h2>Rating</h2>
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="rate">
+                                                                        <input type="radio" id="star5" name="rate" value="5" />
+                                                                        <label for="star5" title="text">5 stars</label>
+                                                                        <input type="radio" id="star4" name="rate" value="4" />
+                                                                        <label for="star4" title="text">4 stars</label>
+                                                                        <input type="radio" id="star3" name="rate" value="3" />
+                                                                        <label for="star3" title="text">3 stars</label>
+                                                                        <input type="radio" id="star2" name="rate" value="2" />
+                                                                        <label for="star2" title="text">2 stars</label>
+                                                                        <input type="radio" id="star1" name="rate" value="1" />
+                                                                        <label for="star1" title="text">1 star</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex flex-row-reverse bd-highlight">
+                                                                <div class="p-2 bd-highlight">
+                                                                    <button class="btn btn-outline-primary">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                  </div>
+                                                <%}}%>
                                 </li>
                             </div>
                             <%}%>
@@ -113,7 +166,6 @@
                             <button class="btn btn-outline-primary">Submit</button>
                         </div>
                     </div>
-
                 </form>
             </div>
             <%if(sameAuthorBook.length>0){%>
