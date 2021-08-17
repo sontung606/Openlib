@@ -3,6 +3,8 @@ module.exports=(req,res,next)=>{
         next()
     }
     else{
+        const url = req.url
+        req.session.redirectTo =url;
         res.redirect('/login');
     }
 }

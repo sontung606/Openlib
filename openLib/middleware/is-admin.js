@@ -10,6 +10,8 @@ module.exports=(req,res,next)=>{
         }
     }
     else{
-        res.redirect('/');
+        const url = req.url
+        req.session.redirectTo =url;
+        res.redirect('/login');
     }
 }
