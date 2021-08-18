@@ -1,90 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%-include('../template/head')%>
-    <title><%=bookData.title%></title>
+        <title>
+            <%=bookData.title%>
+        </title>
 </head>
-<body >
+
+<body>
     <%-include('../template/navbar') %>
-    <div class="container mb-5">
-        <div class="row">
-            <h1 ><%=bookData.title%></h1>
-            <div class="col-4">
-                <img class="img-thumbnail" src="/<%=bookData.imageUrl%>" alt="<%= bookData.imageUrl%>">
-            </div>
-            <div class="col-8">
-               <p><span class="spantext">Author: </span><%= bookData.author%></p>
-               <p><span class="spantext">Category: </span><%= bookData.categories%></p>
-               <p><span class="spantext">Rating: </span><%= rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
-               <p><span class="spantext">Description: </span><%= bookData.description%></p>
-               <p><span class="spantext">Publish Date: </span><%= moment(bookData.published_date).format('DD/MM/YYYY');%></p>
-               <p class="fw-bold"><span class="spantext fw-bold">Deposit: </span><%= bookData.bookPriceBorrow%> $ <i style="color: #27ae60;" class="fas fa-money-bill-wave-alt"></i></p>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <div col-3>
-                <a href="/book-borrow/<%= bookData._id %>" class="btn btn-outline-primary float-end">Borrow</a>
-            </div>
-        </div>
-        <div class="mb-5">
-            <%if((bookData.RAC.length)>0){%>
-            <div class="card">
-             
-                <div class="card-header">
-                    Comment
-                  </div>
-                <% for(RAC of bookData.RAC){%>
-                <div class="list-group list-group-flush">
-                    <li class="list-group-item">
-                    <p id="rcorners2"><%=RAC.accountId.firstname%><%=RAC.accountId.lastname%></p>
-                    <p><%=RAC.rating%> <i style="color: #ff9900;" class="fas fa-star"></i></p>
-                    <p><%=RAC.comment%></p>
-                    <%if(locals.accountDataNav){%>
-                        <%if(locals.accountDataNav.authority.authority=='admin'){%>
-                    <div style="text-align: end;">
-                        <a href="/RAC-Delete/<%=bookData._id%>/<%=RAC._id%>"><i class="fas fa-trash-alt fa-lg"></i></a>
-                    </div>
-                    <%}}%>
-                </li>
-                </div>
-                <%}%>
-              </div>
-              <%}else{%>
-                <div class="border rounded">
-                    <div style="text-align: center;">
-                        <h2>
-                            No comment
-                        </h2>
-                    </div>
-                </div>   
-                <%}%>
-        </div>
-        <div>
-            <form method="POST" action="/book-RAC">
-                <input type="hidden" name="id" value="<%=bookData._id%>">
-            <h2>Comment</h2>
-            <textarea class="form-control" type="text" name="comment"></textarea>
-            <h2>Rating</h2>
+        <div class="container mb-5">
             <div class="row">
-                <div class="col-12">
-                    <div class="rate">
-                        <input type="radio" id="star5" name="rate" value="5" />
-                        <label for="star5" title="text">5 stars</label>
-                        <input type="radio" id="star4" name="rate" value="4" />
-                        <label for="star4" title="text">4 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3" />
-                        <label for="star3" title="text">3 stars</label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label for="star2" title="text">2 stars</label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label for="star1" title="text">1 star</label>
-                    </div>
+                <h1>
+                    <%=bookData.title%>
+                </h1>
+                <div class="col-4">
+                    <img class="img-thumbnail" src="/<%=bookData.imageUrl%>" alt="<%= bookData.imageUrl%>">
+                </div>
+                <div class="col-8">
+                    <p><span class="spantext">Author: </span>
+                        <%= bookData.author%>
+                    </p>
+                    <p><span class="spantext">Category: </span>
+                        <%= bookData.categories%>
+                    </p>
+                    <p><span class="spantext">Rating: </span>
+                        <%= rating%> <i style="color: #ff9900;" class="fas fa-star"></i>
+                    </p>
+                    <p><span class="spantext">Description: </span>
+                        <%= bookData.description%>
+                    </p>
+                    <p><span class="spantext">Publish Date: </span>
+                        <%= moment(bookData.published_date).format('DD/MM/YYYY');%>
+                    </p>
+                    <p class="fw-bold"><span class="spantext fw-bold">Deposit: </span>
+                        <%= bookData.bookPriceBorrow%> $ <i style="color: #27ae60;"
+                                class="fas fa-money-bill-wave-alt"></i>
+                    </p>
                 </div>
             </div>
-            <button class="btn btn-outline-primary  float-end">Submit</button>
-            </form>
+            <div class="row mb-5">
+                <div col-3>
+                    <a href="/book-borrow/<%= bookData._id %>" class="btn btn-outline-primary float-end">Borrow</a>
+                </div>
+            </div>
+            <div class="mb-5">
+                <%if((bookData.RAC.length)>0){%>
+                    <div class="card">
+
+                        <div class="card-header">
+                            Comment
+                        </div>
+                        <% for(RAC of bookData.RAC){%>
+                            <div class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <p id="rcorners2">
+                                        <%=RAC.accountId.firstname%>
+                                            <%=RAC.accountId.lastname%>
+                                    </p>
+                                    <p>
+                                        <%=RAC.rating%> <i style="color: #ff9900;" class="fas fa-star"></i>
+                                    </p>
+                                    <p>
+                                        <%=RAC.comment%>
+                                    </p>
+                                    <%if(locals.accountDataNav){%>
+                                        <%if(locals.accountDataNav.authority.authority=='admin'){%>
+                                            <div style="text-align: end;">
+                                                <a href="/RAC-Delete/<%=bookData._id%>/<%=RAC._id%>"><i
+                                                        class="fas fa-trash-alt fa-lg"></i></a>
+                                            </div>
+                                            <%}}%>
+
+                                        <%if(locals.accountDataNav){%>
+                                            <%if(locals.accountDataNav._id==RAC.accountId._id){%>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-1">
+                                                        <div style="text-align: end;">
+                                                            <a href="/RAC-Delete/<%=bookData._id%>/<%=RAC._id%>"><i
+                                                                    class="fas fa-trash-alt fa-lg"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <div style="text-align: end;">
+                                                            <a  data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                                <i class="fas fa-edit fa-lg"></i>
+                                                              </a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse pt-1" id="collapseExample">
+                                                    <div class="card card-body">
+                                                        <form method="POST" action="/RAC-update">
+                                                            <input type="hidden" name="RACId" value="<%=RAC._id%>">
+                                                            <input type="hidden" name="accountId" value="<%=locals.accountDataNav._id%>">
+                                                            <input type="hidden" name="id" value="<%=bookData._id%>">
+                                                            <h2>Comment</h2>
+                                                            <textarea class="form-control" type="text" name="comment"></textarea>
+                                                            <h2>Rating</h2>
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="rate">
+                                                                        <input type="radio" id="star5" name="rate" value="5" />
+                                                                        <label for="star5" title="text">5 stars</label>
+                                                                        <input type="radio" id="star4" name="rate" value="4" />
+                                                                        <label for="star4" title="text">4 stars</label>
+                                                                        <input type="radio" id="star3" name="rate" value="3" />
+                                                                        <label for="star3" title="text">3 stars</label>
+                                                                        <input type="radio" id="star2" name="rate" value="2" />
+                                                                        <label for="star2" title="text">2 stars</label>
+                                                                        <input type="radio" id="star1" name="rate" value="1" />
+                                                                        <label for="star1" title="text">1 star</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex flex-row-reverse bd-highlight">
+                                                                <div class="p-2 bd-highlight">
+                                                                    <button class="btn btn-outline-primary">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                  </div>
+                                                <%}}%>
+                                </li>
+                            </div>
+                            <%}%>
+                    </div>
+                    <%}else{%>
+                        <div class="border rounded">
+                            <div style="text-align: center;">
+                                <h2>
+                                    No comment
+                                </h2>
+                            </div>
+                        </div>
+                        <%}%>
+            </div>
+            <div>
+                <form method="POST" action="/book-RAC">
+                    <input type="hidden" name="id" value="<%=bookData._id%>">
+                    <h2>Comment</h2>
+                    <textarea class="form-control" type="text" name="comment"></textarea>
+                    <h2>Rating</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <div class="p-2 bd-highlight">
+                            <button class="btn btn-outline-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <%if(sameAuthorBook.length>0){%>
+                <h2 class="pt-5">More by <%=bookData.author%></h2>
+                <div class="row">
+                    <%for(sameAuthorBooks of sameAuthorBook){%>
+                        <div class="col-lg-2 col-md-6 pb-2">
+                            <div class="card h-100 ">
+                                <a href="/book-details/<%=sameAuthorBooks._id%>">
+                                    <img src="/<%=sameAuthorBooks.imageUrl%>" class="card-img-top" height="280px" width="100%"
+                                        alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class=" card-title fw-bold">
+                                        <%=sameAuthorBooks.title%>
+                                    </h5>
+                                    <p class="card-text author">
+                                        <%=sameAuthorBooks.author%>
+                                    </p>
+                                </div>
+                                <div class="card-footer d-flex" style="background-color: #ffeaa7;">
+                                    <h6><strong>
+                                            <%=sameAuthorBooks.bookPriceBorrow%> USD
+                                        </strong></h6>
+                                    <a href="/book-details/<%=sameAuthorBooks._id%>" class="ms-auto">
+                                        <strong>Details</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                </div>
+                <%}%>
+                    <%if(sameCategoryBooks.length>0){%>
+                        <h2 class="pt-5">More <%=bookData.categories%></h2>
+                        <div class="row">
+                            <%for(sameCategoryBooks of sameCategoryBooks){%>
+                                <div class="col-lg-2 col-md-6 pb-2">
+                                    <div class="card h-100 ">
+                                        <a href="/book-details/<%=sameCategoryBooks._id%>">
+                                            <img src="/<%=sameCategoryBooks.imageUrl%>" class="card-img-top" height="280px"
+                                                width="100%" alt="...">
+                                        </a>
+                                        <div class="card-body">
+                                            <h5 class=" card-title fw-bold">
+                                                <%=sameCategoryBooks.title%>
+                                            </h5>
+                                            <p class="card-text author">
+                                                <%=sameCategoryBooks.author%>
+                                            </p>
+                                        </div>
+                                        <div class="card-footer d-flex" style="background-color: #ffeaa7;">
+                                            <h6><strong>
+                                                    <%=sameCategoryBooks.bookPriceBorrow%> USD
+                                                </strong></h6>
+                                            <a href="/book-details/<%=sameCategoryBooks._id%>" class="ms-auto">
+                                                <strong>Details</strong>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                        </div>
+                        <%}%>
         </div>
-    </div>
-    <%-include('../template/footer')%>
+        <%-include('../template/footer')%>
 </body>
+
 </html>

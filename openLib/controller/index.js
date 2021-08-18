@@ -20,11 +20,15 @@ exports.getIndex = async (req, res, next) => {
       }
     },
     { $limit : 8 }
-]);
+  ]);
+  const titleArray = await Book.distinct("title")
+  const authorArray = await Book.distinct("author")
+  const autocorrectSeachArray = titleArray.concat(authorArray);
   res.render('index/indexBook', {
     bookCategories: bookCategories,
     trendBooks:trendBooks,
     booksData: books,
+    bookTitleData:autocorrectSeachArray,
     moment: moment,
     path: '/'
   });

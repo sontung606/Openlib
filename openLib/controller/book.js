@@ -3,6 +3,7 @@ const BookBorrow = require('../models/booksBorrow');
 const account = require('../models/account');
 var moment = require('moment');
 const { populate } = require('../models/book');
+const book = require('../models/book');
 
 const ITEMS_PER_PAGE = 8;
 
@@ -11,6 +12,25 @@ exports.getBookSearch = async (req, res, next) => {
   const search = req.query.search;
   const cate = req.query.cate;
   const url = req.url;
+  const trendBooks = await BookBorrow.aggregate([
+    { "$group": { 
+        "_id": '$bookId', 
+        "count": { "$sum": 1 }
+    }},
+    { "$sort": { "count": -1 } },
+    {
+      "$lookup":{
+        from: "books",
+        localField: "_id",
+        foreignField: "_id",
+        as:"books"
+      }
+    },
+    { $limit : 8 }
+  ]);
+  const titleArray = await Book.distinct("title")
+  const authorArray = await Book.distinct("author")
+  const autocorrectSeachArray = titleArray.concat(authorArray);
   let numItem;
   if (search == null || cate == null) {
     Book.find()
@@ -18,7 +38,9 @@ exports.getBookSearch = async (req, res, next) => {
         let bookCategories = result;
         res.render('books/bookCategories', {
           bookData: null,
-          bookCategories: bookCategories
+          trendBooks:trendBooks,
+          bookCategories: bookCategories,
+          bookTitleData:autocorrectSeachArray
         })
       });
   }
@@ -47,6 +69,7 @@ exports.getBookSearch = async (req, res, next) => {
           res.render('books/bookCategories', {
             bookData: books,
             bookCategories: bookCategories,
+            trendBooks:trendBooks,
             totalBooks: numItem,
             hasNextPage: ITEMS_PER_PAGE * page < numItem,
             hasPreviousPage: page > 1,
@@ -55,7 +78,8 @@ exports.getBookSearch = async (req, res, next) => {
             currentPage: page,
             previousPage: page - 1,
             lastPage: Math.ceil(numItem / ITEMS_PER_PAGE),
-            url: url
+            url: url,
+            bookTitleData:autocorrectSeachArray
           })
         });
       })
@@ -83,6 +107,7 @@ exports.getBookSearch = async (req, res, next) => {
           res.render('books/bookCategories', {
             bookData: books,
             bookCategories: bookCategories,
+            trendBooks:trendBooks,
             totalBooks: numItem,
             hasNextPage: ITEMS_PER_PAGE * page < numItem,
             hasPreviousPage: page > 1,
@@ -91,46 +116,78 @@ exports.getBookSearch = async (req, res, next) => {
             currentPage: page,
             previousPage: page - 1,
             lastPage: Math.ceil(numItem / ITEMS_PER_PAGE),
-            url: url
+            url: url,
+            bookTitleData:autocorrectSeachArray
           })
         });
       })
   }
 }
-exports.getbook = (req, res, next) => {
+exports.getbook = async (req, res, next) => {
   const bookID = req.params.bookID;
-  Book.findById(bookID)
-    .populate('RAC.accountId')
-    .then(book => {
-      let sao = 0;
-      for (ratingTotal of book.RAC) {
-        sao = sao + ratingTotal.rating;
-      }
-      const rating = (sao / book.RAC.length).toFixed(1);
-      res.render('books/bookdetail', {
-        bookData: book,
-        rating: rating,
-        moment: moment
-      })
+  let sao = 0;
+  try{
+    const bookFind = await Book.findById(bookID).populate('RAC.accountId');
+    const sameCategoryBooks = await Book.find({_id:{$ne:bookFind._id},categories:bookFind.categories})
+    const sameAuthorBook = await Book.find({_id:{$ne:bookFind._id},author:bookFind.author})
+    for (ratingTotal of bookFind.RAC) {
+      sao = sao + ratingTotal.rating;
+    }
+    const rating = (sao / bookFind.RAC.length).toFixed(1);
+    res.render('books/bookdetail', {
+      bookData: bookFind,
+      rating: rating,
+      moment: moment,
+      sameAuthorBook:sameAuthorBook,
+      sameCategoryBooks:sameCategoryBooks
     })
-    .catch(err=>{
-      res.render('404')
-    })
+  }
+  catch (err){
+    res.render('404')
+  }
 }
 exports.getRACDelete = async (req, res, next) => {
   const RACId = req.params.bookRACID;
   const bookId = req.params.bookID;
   const book = await Book.findById(bookId);
-  for (let i = 0; i < book.RAC.length; i++) {
-    if (book.RAC[i]._id == RACId) {
-      book.RAC.splice(i, 1);
-      break;
+  for (let i = 0; i < book.RAC.length; i++) {  
+    if(req.session.accountData._id==book.RAC[i].accountId ||req.session.accountData.authority.authority=='admin')
+    {
+      if (book.RAC[i]._id == RACId) {
+        book.RAC.splice(i, 1);
+        Book.findByIdAndUpdate({ _id: bookId }, book).then(() => {
+          res.redirect('/book-details/' + bookId);
+        });
+        break;
+      }
     }
   }
-  Book.findByIdAndUpdate({ _id: bookId }, book).then(() => {
-    res.redirect('/book-details/' + bookId);
-  });
 }
+exports.postRACUpdate = async (req, res, next) => {
+  const RACId = req.body.RACId;
+  const bookId = req.body.id;
+  const accountId = req.body.accountId;
+  const ratingInput = req.body.rate;
+  const commentInput = req.body.comment;
+  const RACInput = {
+    _id:RACId,
+    accountId: accountId,
+    rating: ratingInput,
+    comment: commentInput
+  };
+  const book = await Book.findById(bookId);
+  for (let i = 0; i < book.RAC.length; i++) {  
+    if(RACId==book.RAC[i]._id)
+    {
+     book.RAC[i] = RACInput;
+     Book.findByIdAndUpdate({ _id: bookId }, book).then(() => {
+      res.redirect('/book-details/' + bookId);
+    });
+    break;
+    }
+  }
+}
+ 
 exports.postRAC = (req, res, next) => {
   const id = req.body.id;
   const ratingInput = req.body.rate;
