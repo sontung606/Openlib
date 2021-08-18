@@ -67,15 +67,15 @@ mongoose
     'mongodb+srv://tung:tung@cluster0.n5p01.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true}
   ) 
   .then(result => {
-        //00 00 12 * * 0-6
-        //*/01 * * * * * 
+        // 00 00 12 * * 0-6
+        // */01 * * * * * 
       CronJob.schedule('00 00 12 * * 0-6', function() {
       BookBorrow.find()
       .populate('accountId')
       .then(result=>{
         for(books of result){
           let today = new Date();
-          if((new Date(books.dateReturn).getDate()-1)==today.getDate()){   
+          if((new Date(books.dateReturn).getDate()-1)==today.getDate() && books.status == true){   
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate()+1);  
             const mailOptions = {
