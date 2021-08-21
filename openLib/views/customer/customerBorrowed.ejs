@@ -36,6 +36,7 @@
                                         <th>Author</th>
                                         <th>Date borrow</th>
                                         <th>Date Return</th>
+                                        <th>Deposit</th>
                                         <th>Status</th>
                                         <th></th>
                                     </tr>
@@ -61,6 +62,7 @@
                                                     <td>Not received</td>
                                                   <%}%>    
                                             <%}%>
+                                            <td><%=book.bookId.bookPriceBorrow%> USD </td>
                                             <td>
                                                 <a type="button" class="btn btn-info" href="/book-details/<%=book.bookId._id%>">
                                                     Rating 

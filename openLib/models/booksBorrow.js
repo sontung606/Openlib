@@ -22,6 +22,9 @@ const bookSchema = new Schema({
         ref: 'books',
         require: true
     },
+    rentPriceTotal: {
+        type: Number
+    },
     status: {
         type: Boolean,
         default: false

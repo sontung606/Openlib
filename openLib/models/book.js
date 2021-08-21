@@ -41,6 +41,10 @@ const bookSchema = new Schema({
     imageUrl: {
         type: String,
         required: true
+    },
+    bookPriceBorrow: {
+        type: Number,
+        require: true
     }
 })
 module.exports = mongoose.model('books', bookSchema);

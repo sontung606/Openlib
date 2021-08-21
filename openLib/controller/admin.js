@@ -37,7 +37,8 @@ exports.postAddBook = (req, res, next) => {
     const published_dateInput = req.body.published_date;
     const imageUrlInput = req.file.path;
     const categoriesInput = req.body.categories;
-    const book = new Book({ title: titleInput, author: authorInput, rating: ratingInput, description: descriptionInput, published_date: published_dateInput, imageUrl: imageUrlInput, categories: categoriesInput });
+    const bookPriceInput = req.body.bookPriceBorrow;
+    const book = new Book({ title: titleInput, author: authorInput, rating: ratingInput, description: descriptionInput, published_date: published_dateInput, imageUrl: imageUrlInput, categories: categoriesInput, bookPriceBorrow: bookPriceInput});
     book.save().then(() => {
         res.redirect('/admin/add-book')
     })

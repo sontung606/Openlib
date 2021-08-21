@@ -25,7 +25,13 @@ exports.postLogin = (req, res, next) => {
         else {
           req.session.isLoggedIn = true;
           req.session.accountData = result;
-          res.redirect('/');
+          if(req.session.redirectTo)
+          {
+            res.redirect(req.session.redirectTo);
+          }
+          else{
+            res.redirect('/');
+          }
         }
       }
       else {

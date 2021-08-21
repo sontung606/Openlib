@@ -34,6 +34,8 @@
                                     <th scope="col">Date return</th>
                                     <th scope="col">Account email</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Deposit</th>
+                                    <th scope="col">Total rent</th>
                                     <th scope="col">Action</th>
                                   </tr>
                                 </thead>
@@ -52,24 +54,32 @@
                                     <%if(book.status==true){%>
                                         <%if(book.dateReturn< Date){%>
                                         <td class="text-danger">Book is overdue</td>
-                                        <td><a href="/staff-confirmReturn/<%=book._id%>" onclick="return confirm('Confirm return book ?')"><i class="fas fa-check"></i></a></td>
+                                        <td class="text-danger">Ban</td>
+                                        <td class="text-danger">Not paid</td>
+                                        <td><a href="/staff-confirmReturn/<%=book._id%>"><i class="fas fa-check"></i></a></td>
                                         <%}else{%>
                                         <td class="text-success">Ongoing</td>
-                                        <td><a href="/staff-confirmReturnSoon/<%=book._id%>" onclick="return confirm('Confirm return book ?')"><i class="fas fa-check"></i></a></td>
+                                        <td class="text-success">Paid</td>
+                                        <td>Not paid</td>
+                                        <td><a href="/staff-confirmReturn/<%=book._id%>"><i class="fas fa-check"></i></a></td>
                                         <%}%>
                                     <%}else{%>
                                         <%if(book.dateReturn< Date){%>
                                           <td >Returned</td>
+                                          <td class="text-success">Solve</td>
+                                          <td class="text-success">Paid <%=book.rentPriceTotal%> $</td>
                                           <td></td>
                                         <%}else{%>
                                           <td>Not received</td>
+                                          <td><%=book.bookId.bookPriceBorrow%> USD</td>
+                                          <td>Not paid</td>
                                           <td>
                                             <div class="row">
                                               <div class="col">
-                                                <a href="/staff-confirmBorrow/<%=book._id%>" onclick="return confirm('Confirm return book ?')"><i class="fas fa-check"></i></a>          
+                                                <a href="/staff-confirmBorrow/<%=book._id%>"><i class="fas fa-check"></i></a>          
                                               </div>
                                               <div class="col text-danger">
-                                                <a href="/staff-cancelBorrow/<%=book._id%>" onclick="return confirm('Are you sure ?')"> <i class="fas fa-times"></i></a>
+                                                <a href="/staff-cancelBorrow/<%=book._id%>"><i class="fas fa-times"></i></a>
                                               </div>
                                             </div>
                                           </td>

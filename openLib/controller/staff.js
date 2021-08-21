@@ -26,7 +26,6 @@ exports.getBookBorrows = (req, res, next) => {
                 Date: date
             });
         })
-
 }
 exports.getConfirmBorrows = (req, res, next) => {
     const Id = req.params.Id;
@@ -41,31 +40,25 @@ exports.getConfirmBorrows = (req, res, next) => {
         })
 }
 
-exports.getConfirmReturn = (req, res, next) => {
-    const Id = req.params.Id;
-    BookBorrow.findOneAndUpdate({ _id: Id }, {
-        status: false
-    })
-        .then(result => {
-            res.redirect('/staff-bookBorrow');
-        })
-        .catch(err => {
-            console.log(err);
-        })
-}
-exports.getConfirmReturnSoon = (req, res, next) => {
+exports.getConfirmReturn = async (req, res, next) => {
     const Id = req.params.Id;
     const date = new Date();
+
+    const bookBorrowFind = await BookBorrow.findById(Id).populate('bookId');
+    const borrowDate = bookBorrowFind.dateBorrow;
+    let rentDay = date.getDate() - borrowDate.getDate();
+    const rentTotal = rentDay*((bookBorrowFind.bookId.bookPriceBorrow * 1)/100);
     BookBorrow.findOneAndUpdate({ _id: Id}, {
         status: false,
-        dateReturn:date 
+        dateReturn:date,
+        rentPriceTotal:rentTotal.toFixed(2)
     })
-        .then(result => {
-            res.redirect('/staff-bookBorrow');
-        })
-        .catch(err => {
-            console.log(err);
-        })
+    .then(result => {
+        res.redirect('/staff-bookBorrow');
+    })
+    .catch(err => {
+        console.log(err);
+    })
 }
 exports.getCancelBorrow = (req, res, next) => {
     const Id = req.params.Id;

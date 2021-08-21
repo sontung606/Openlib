@@ -4,10 +4,22 @@
 <head>
     <%-include('../template/head')%>
         <title>OpenLib</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
-
+<script>
+    $( function() {
+      var Data = '<%=bookTitleData%>' ;
+      Data = Data.split(',');
+  $( "#myInput" ).autocomplete({
+    source: Data
+  });
+});
+</script>
 <body>
     <%-include('../template/navbar')%>
+        <a onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-double-up fa-lg"></i></a>
         <div class="styleText d-flex justify-content-center align-items-center flex-column bd-highlight"
             style="background-image: url('image/books1.jpg'); background-repeat: no-repeat; height: 500px;">
             <div style="color: #ecf0f1; ">
@@ -16,10 +28,10 @@
                 </div>
                 <div class="p-2 bd-highlight">Shop Online with Bookshop.</div>
                 <div>
-                    <form method="GET" action="/book-search/">
+                    <form method="GET" action="/book-search/" autocomplete="off">
                         <input type="hidden" name="page" value="1">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Book's name, author..."
+                            <input id="myInput" type="text" class="form-control" placeholder="Book's name, author..."
                                 aria-label="Recipient's username" aria-describedby="button-addon2" name="search">
                             <button class="btn btn-secondary" type="submit" id="button-addon2">Search</button>
                             <input type="hidden" name="cate" value="All">
@@ -31,6 +43,41 @@
                 </div>
             </div>
         </div>
+        </div>
+        <br>
+        <h2 style="text-align: center; color: #6c5ce7; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" >Trending books</h2>
+        <div class="container bg-light">
+            <div class="row">
+                <%for(arr of trendBooks){%>
+                    <%for(trendbooks of arr.books){%>
+                    <div class="col-lg-3 col-md-6 pb-2">
+                        <div class="card h-100 ">
+                            <a href="/book-details/<%=trendbooks._id%>">
+                                <img src="/<%=trendbooks.imageUrl%>" class="card-img-top" height="350px"
+                                    width="100%" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <h5 class=" card-title fw-bold">
+                                    <%=trendbooks.title%>
+                                </h5>
+                                <p class="card-text author">
+                                    <%=trendbooks.author%>
+                                </p>
+                            </div>
+                            <div class="card-footer d-flex" style="background-color: #ffeaa7;">
+                                <h6><strong>
+                                        <%=trendbooks.bookPriceBorrow%> USD
+                                    </strong></h6>
+                                <a href="/book-details/<%=trendbooks._id%>" class="ms-auto">
+                                    <strong>Details</strong>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <%}%>
+                <%}%>
+            </div>
         </div>
         <br>
         <h2 style="text-align: center;" class="h2"> Books</h2>
@@ -48,7 +95,7 @@
                                     <div class="col-lg-3 col-md-6 pb-2">
                                         <div class="card h-100 ">
                                             <a href="/book-details/<%=books._id%>">
-                                                <img src="/<%=books.imageUrl%>" class="card-img-top" height="400px"
+                                                <img src="/<%=books.imageUrl%>" class="card-img-top" height="350px"
                                                     width="100%" alt="...">
                                             </a>
                                             <div class="card-body">
@@ -59,11 +106,15 @@
                                                     <%=books.author%>
                                                 </p>
                                             </div>
-                                            <a href="/book-details/<%=books._id%>" style="background-color: #ffeaa7;">
-                                                <div class="card-footer d-flex justify-content-center">
-                                                    Details
-                                                </div>
-                                            </a>
+                                            <div class="card-footer d-flex" style="background-color: #ffeaa7;">
+                                                <h6><strong>
+                                                        <%=books.bookPriceBorrow%> USD
+                                                    </strong></h6>
+                                                <a href="/book-details/<%=books._id%>" class="ms-auto">
+                                                    <strong>Details</strong>
+                                                </a>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <%numBook++}%>
@@ -75,10 +126,9 @@
                                                             class="btn btn-success">See more</button></a>
                                                 </div>
                                             </div>
-                                            <%}%>
+                                    <%}%>
             </div>
         </div>
-
 </body>
 <%-include('../template/footer') %>
 

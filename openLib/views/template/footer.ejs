@@ -10,6 +10,7 @@
         </div>
     </div>
 </footer> -->
+<a onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-double-up fa-lg"></i></a>
 <footer class="footer ">
     <div class="contain">
     <div class="col">
@@ -58,3 +59,20 @@
         <li>Order Book</li>
       </ul>
     </footer>
+
+    <script>
+      var mybutton = document.getElementById("myBtn");
+      window.onscroll = function () { scrollFunction() };
+
+      function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+              mybutton.style.display = "block";
+          } else {
+              mybutton.style.display = "none";
+          }
+      }
+      function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+      }
+  </script>

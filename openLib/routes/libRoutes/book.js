@@ -9,6 +9,8 @@ router.get('/book-borrow/:bookID',isLogin,book.getBookBorrow);
 router.post('/book-borrow',isLogin,book.postBookBorrow);
 router.post('/book-RAC',isLogin,book.postRAC);
 router.get('/book-search',book.getBookSearch);
-router.get('/RAC-Delete/:bookID/:bookRACID',isAdmin,book.getRACDelete);
+router.get('/RAC-Delete/:bookID/:bookRACID',isLogin,book.getRACDelete);
+router.post('/RAC-update',isLogin,book.postRACUpdate);
+
 
 module.exports=router;
