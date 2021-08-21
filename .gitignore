@@ -689,3 +689,11 @@ openLib/node_modules/node-cron/test/scheduler-test.js
 openLib/node_modules/node-cron/test/storage-test.js
 openLib/node_modules/node-cron/test/task-test.js
 openLib/node_modules/node-cron/test/time-matcher-test.js
+*.js
+openLib/node_modules/nodemailer/README.md
+openLib/node_modules/nodemailer/package.json
+openLib/node_modules/nodemailer/LICENSE
+openLib/node_modules/nodemailer/lib/well-known/services.json
+openLib/node_modules/nodemailer/CONTRIBUTING.md
+openLib/node_modules/nodemailer/CODE_OF_CONDUCT.md
+openLib/node_modules/nodemailer/CHANGELOG.md
